@@ -5,29 +5,37 @@ WITHDRAW
 {% endblock %}
 
 {% block content%}
-<div class="m-5">
-<h1 class="text-white"> WITHDRAW </h1>
+<div>
+    <div class="row">
+        <div class="col-md px-3 my-3">
+        <h1 class="text-white"> WITHDRAW </h1>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <input type="text" class="form-control my-3" id="formGroupExampleInput" placeholder="Amount" name="withdraw_amount">
+            <input type="text" class="form-control my-3" id="formGroupExampleInput" placeholder="Enter your name" name="withdraw_name">
+            <input type="text" class="form-control my-3" id="formGroupExampleInput" placeholder="WALLET ID" name="wallet_id">
+            <button type="submit" class="btn btn-secondary">SUBMIT</button>
+        
+        </form>
+        
+    </div>
+    <div class="col-md px-3 djhrjh my-3">
+        <h1 class="text-white">ANOTHER METHOD</h1>
 
-<form method="POST">
-    {% csrf_token %}
-    
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Amount" name="withdraw_amount">
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter your name" name="withdraw_name">
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="WALLET ID" name="wallet_id">
-    <button type="submit" class="btn btn-secondary">SUBMIT</button>
-
-</form>
-<h2 class="text-center">OR</h2>
-<form method="POST">
-    {% csrf_token %}
-    
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Amount" name="withdraw_amount">
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter your name" name="withdraw_name">
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="ACCOUNT NUMBER" name="account_no">
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="IFSC CODE" name="ifsc_code">
-    <button type="submit" class="btn btn-secondary">SUBMIT</button>
-
-</form>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <input type="text" class="form-control my-3" id="formGroupExampleInput" placeholder="Amount" name="withdraw_amount">
+            <input type="text" class="form-control my-3" id="formGroupExampleInput" placeholder="Enter your name" name="withdraw_name">
+            <input type="text" class="form-control my-3" id="formGroupExampleInput" placeholder="ACCOUNT NUMBER" name="account_no">
+            <input type="text" class="form-control my-3" id="formGroupExampleInput" placeholder="IFSC CODE" name="ifsc_code">
+            <button type="submit" class="btn btn-secondary">SUBMIT</button>
+        
+        </form>
+        
+    </div>
+</div>
 <ul class="messages">
 {% for message in messages %}
 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>

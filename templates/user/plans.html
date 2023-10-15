@@ -5,18 +5,26 @@ OUR PLANS
 {% endblock %}
 
 {% block content%}
-<div class="m-5">
-<h1 class="fw-bold text-white"> PLANS </h1><br>
-{% for plan in plans %}
-<a href="{% url 'payment' %}" class="card text-white mb-3 custom-link" style="max-width: 18rem; text-decoration: none; border: 2px solid #007BFF; border-radius: 10px; transition: transform 0.2s; background-color: #343a40;">
-    <div class="card-body">
-        <h4 class="card-title text-center"><strong>{{ plan.plan_name }}</strong></h4>
-        <h4 class="card-title text-center"><strong>$ {{ plan.plan_min_price }} - $ {{ plan.plan_max_price }}</strong></h4>
-        <p class="card-text text-center" style="font-size: 1.2em;">({{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%)</p>
-       <!-- <p class="card-text text-center" style="font-size: 1.2em;">Day - ($0.5 - $1.5)</p> -->
+<div>
+<h1 class="h2 fw-bold text-white"> PLANS </h1><br>
+
+<div class="row">
+    {% for plan in plans %}
+    <div class="col-md">
+
+        <a href="{% url 'payment' %}" class="card text-white mb-3 custom-link" style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 5px; transition: transform 0.2s; background-color: #2d4059;">
+            <div class="card-body">
+                <h4 class="card-title text-center"><strong>{{ plan.plan_name }}</strong></h4>
+                <h4 class="card-title text-center"><strong>$ {{ plan.plan_min_price }} - $ {{ plan.plan_max_price }}</strong></h4>
+                <p class="card-text text-center" style="font-size: 1.2em;">({{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%)</p>
+               <!-- <p class="card-text text-center" style="font-size: 1.2em;">Day - ($0.5 - $1.5)</p> -->
+            </div>
+        </a>
+        
     </div>
-</a>
 {% endfor %}
+</div>
+
 
 <br>
 

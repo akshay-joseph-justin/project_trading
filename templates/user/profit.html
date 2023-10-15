@@ -5,41 +5,45 @@ WALLET
 {% endblock %}
 
 {% block content%}
-<div class="m-5">
-<h1 class="text-white"> WALLET </h1>
+<div>
+<h1 class="h2 fw-bold text-white"> WALLET </h1>
 
-<div class="m-5">
+<div>
 
         {% if user_plan %}
-        <div class="card text-white mb-3 custom-link" style="max-width: 18rem; text-decoration: none; border: 2px solid #007BFF; border-radius: 10px; transition: transform 0.2s; background-color: #343a40;">
-            <div class="card-body">
-                <h4 class="card-title text-center"><strong>{{ user_plan.plan.plan_name }}</strong></h4>
-                <h4 class="card-title text-center"><strong>$ {{ user_plan.invested_amount }}</strong></h4>
-                <p class="card-text text-center" style="font-size: 1.2em;">({{ user_plan.plan.plan_min_percentage }}% - {{ user_plan.plan.plan_max_percentage }}%)</p>
-                <br>
-                <p class="card-text text-center" style="font-size: 1.2em;">AMOUNT - $ {{ user_plan.invested_amount }}</p>
-                <p class="card-text text-center" style="font-size: 1.2em;">TOTAL DAYS - </p>
-                <p class="card-text text-center" style="font-size: 1.2em;">Total Profit - $ {{ user_plan.user_profit }}</p>
-                
+        <div class="card text-light"  style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 5px; transition: transform 0.2s; background-color: #2d4059;">
+            <div class="card-header display-6 fw-bold">
+                {{ user_plan.plan.plan_name }}
             </div>
-        </div>
+            <div class="card-body" style="background-color: #2d4059;">
+              <h5 class="card-title">$ {{ user_plan.invested_amount }}</h5>
+              <ul class="list-group">
+                <li class="list-group-item" style="background-color: #2d4059; color: white;">({{ user_plan.plan.plan_min_percentage }}% - {{ user_plan.plan.plan_max_percentage }}%)</li>
+                <li class="list-group-item" style="background-color: #2d4059; color: white;">AMOUNT - $ {{ user_plan.invested_amount }}</li>
+                <li class="list-group-item" style="background-color: #2d4059; color: white;">TOTAL DAYS - </li>
+              </ul>
+            </div>
+            <div class="card-footer text-body-secondary">
+                <p class="text-light">
+
+                    Total Profit - $ {{ user_plan.user_profit }}
+                </p>
+            </div>
+          </div>
         {% endif %}
 
-        
-                <div class="card text-white mb-3 custom-link" style="max-width: 18rem; text-decoration: none; border: 2px solid #007BFF; border-radius: 10px; transition: transform 0.2s; background-color: #343a40;">
-                    <div class="card-body">
-                        <h4 class="card-title text-center"><strong>
-                            REFERRAL</strong></h4>
-                        <p class="card-text text-center" style="font-size: 1.2em;">LEVEL -</p>
-                        <p class="card-text text-center" style="font-size: 1.2em;"></p>
-                        <br>
-                   
-                        <p class="card-text text-center" style="font-size: 1.2em;">Total Profit - </p>
-                        
-                    </div>
-                </div>
-                <br>
-
+        <br>
+        <div class="card" style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 5px; transition: transform 0.2s; background-color: #2d4059;">
+            <ul class="list-group list-group-flush"style="background-color: #2d4059;">
+              <li class="list-group-item" style="background-color: #2d4059; color: white;"><h3 class="h3 fw-bold">REFERRAL</h3></li>
+              <li class="list-group-item" style="background-color: #2d4059; color: white;">LEVEL -</li>
+              <!-- <li class="list-group-item" style="background-color: #2d4059; color: white;"></li> -->
+            </ul>
+            <div class="card-footer text-white">
+                Total Profit -
+            </div>
+          </div>
+               <br>
                 {% comment %} <h3 class="text-white"> TOTAL - </h3> {% endcomment %}
                 <h3 class="text-white"> BALANCE - $ {{ user_plan.user_profit }}</h3>
 {% endblock %}

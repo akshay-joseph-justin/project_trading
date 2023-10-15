@@ -5,11 +5,16 @@ ADMIN WITHDRAW
 {% endblock %}
 
 {% block content%}
-<div class="m-5">
+<div>
 <h1> HISTORY </h1>
 <br>
-<a href="{% url 'history' action='payments' %}"> DEPOSIT ||</a>
-<a href="{% url 'history' action='withdraws' %}"> WITHDRAWAL </a>
+<nav>
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link text-light"  style="background-color: #222831;" href="{% url 'history' action='payments' %}"><i class="fa-solid fa-angles-left"></i> DEPOSIT</a></li>
+    <li class="page-item"><a class="page-link text-light"  style="background-color: #222831;" href="{% url 'history' action='withdraws' %}">WITHDRAWAL</a></li>
+    <li class="page-item"><a class="page-link text-light"  style="background-color: #222831;" href="{% url 'history' action='profit' %}">PROFIT <i class="fa-solid fa-angles-right"></i></a></li>
+  </ul>
+</nav>
 <table class="table table-dark table-striped">
   <thead>
       <tr>
