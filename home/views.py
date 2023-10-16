@@ -531,7 +531,7 @@ class ModAddProfit_view(View):
     
     def post(self, request):
 
-        plan_name = request.POST.get("uname", None)
+        plan_name = request.POST.get("plan_name", None)
         percentage = request.POST.get("percentage", None)
 
         uname = request.POST.get("uname", None)
