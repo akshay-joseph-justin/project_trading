@@ -5,14 +5,15 @@ Home
 {% endblock %}
 
 {% block content%}
-<ul class="messages">
+
+<div class="messages">
     {% for message in messages %}
-    <div {% if message.tags %} class="{{ message.tags }}"{% endif %} class="alert alert-warning alert-dismissible fade show" role="alert">
-<P>{{ message }}</P>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+    </div>
     {% endfor %}
-</ul>
+    </div>
 <div class="row" style="border-bottom: 2px solid #343a40;">
     {% if user_plans %}
     <h1 class="h2"> Plans</h1>

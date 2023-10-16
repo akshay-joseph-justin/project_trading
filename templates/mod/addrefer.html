@@ -20,33 +20,6 @@ ADMIN ADD PROFIT
 <br>
 <div class="row">
   <div class="col-md">
-    <div>
-      <h2 class="h2">Plan</h2>
-    
-      <form class=" g-3" style="width: 100%; max-width: 400px;" method="POST">
-        {% csrf_token %}
-        <div class="row">
-          <div class="col" >
-            <!-- <input type="text" class="form-control" placeholder="PLAN NAME" aria-label="First name" name="plan_name"> -->
-            <div style="background-color: #eeeeee; border-radius: 7px; color: black;">
-    
-              <select id="plans" style="width: 100%; height: 40px; border-radius: inherit;" name="plan_name">
-                <option value="" disabled selected>Select a plan</option>
-                {% for plan in plans %}
-                <option value="{{ plan.plan_name }}">{{ plan.plan_name }}</option>
-                {% endfor %}
-              </select>
-            
-            </div>
-          </div>
-        </div>
-        <input type="text" class="form-control my-2" placeholder="PERCENTAGE" aria-label="PERCENTAGE" name="percentage">
-        <input type="text" class="form-control my-2" placeholder="DAYS" aria-label="DAYS" name="days">
-        <button type="submit" class="btn btn-secondary">ADD</button>
-      </form>
-    </div>
-    <br>
-  </div>
   <div class="col-md">
     <div>
       <h2 class="h2">User</h2>
@@ -71,7 +44,6 @@ ADMIN ADD PROFIT
         <button type="submit" class="btn btn-secondary">ADD</button>
       </form>
     </div>
-    
   </div>
 </div>
 

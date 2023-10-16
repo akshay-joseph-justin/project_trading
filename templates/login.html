@@ -5,11 +5,15 @@ Log In
 {% endblock %}
 
 {% block content%}
-<ul class="messages">
+
+<div class="messages">
   {% for message in messages %}
-  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
   {% endfor %}
-</ul>
+  </div>
 <div class=" mx-auto" style="margin-top: 10em; width: 100%; max-width: 500px;">
     <h1 class="h1">Sign In</h1>
     <form method="POST">
@@ -27,6 +31,12 @@ Log In
         <div class="col-12">
             <button type="submit" class="btn btn-secondary">Log In</button>
           </div>
+          <div>
+            <a href="{% url 'signup' %}" class="text-dark">Sign Up</a>
+
+          </div>
+            Dont have an account? <a href="{% url 'signup' %}">Sign Up</a><br>
+            <a href="#">Forgot password</a>
             </div>
           </div>
       </form>

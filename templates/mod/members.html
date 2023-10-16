@@ -7,6 +7,7 @@ ADMIN REGISTRATIONS
 {% block content%}
 <div>
 <h1> REGISTRATIONS </h1>
+<div style="overflow-y: scroll;">
 
 <table class="table table-dark table-striped">
   <thead>
@@ -15,6 +16,7 @@ ADMIN REGISTRATIONS
         <th scope="col">USERNAME</th>
         <th scope="col">STATUS</th>
         <th scope="col">REFFERED BY</th>
+        <th scope="col"> DETAILS </th>
       </tr>
     </thead>
     <tbody>
@@ -24,8 +26,10 @@ ADMIN REGISTRATIONS
           <td>{{ member.username }}</td>
           <td>{{ user_plan.user_status }}</td>
           <td>{{ refferd.referred_user.username }}</td>
+          <td><a class="btn btn-secondary" href="{% url 'mod_member' id=member.id %}" > View </a></td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+</div>
 {% endblock %}

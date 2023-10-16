@@ -22,6 +22,7 @@ urlpatterns = [
     path('moderator/dashboard/', login_required(views.ModDashboard_view.as_view()), name='mod_dashboard'),
     path('moderator/members/', login_required(views.ModMembers_view.as_view()), name='mod_mambers'),
     path('moderator/members/<str:status>', login_required(views.ModMembers_view.as_view()), name='mod_active_member'),
+    path('moderator/member/<int:id>', login_required(views.ModMember_view.as_view()), name='mod_member'),
     path('moderator/payments/<str:action>', login_required(views.ModPayments_view.as_view()), name='mod_payments'),
     path('moderator/payments/action/<str:action>/<int:id>', login_required(views.ModPayments_view.as_view()), name="mod_payments_approve"),
     path('moderator/withdraw/<str:status>', login_required(views.ModWithdraw_view.as_view()), name='mod_withdraw'),

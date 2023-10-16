@@ -1,0 +1,59 @@
+{% extends 'mod/admbase.html' %}
+
+{% block title%}
+{{ member.user.username }}
+{% endblock %}
+
+{% block content%}
+<div>
+<h1> {{ member.user.username }} <a class="btn btn-success" href="{% url 'mod_history' id=member.user.id action='payment' %}"> VIEW HISTORY</a> </h1>
+
+</div>
+
+<div class="messages">
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+</div>
+
+<br>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="row mb-3">
+        <label for="" class="col-sm-2 col-form-label">USERNAME</label>
+        <div class="col-sm-10">
+    <input type="text" class="form-control my-3" aria-label="First name" value="{{ member.user.username }}" name="uname">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-2 col-form-label">AMOUNT</label>
+        <div class="col-sm-10">
+    <input type="text" class="form-control my-3" aria-label="Last name" value="{{ member.invested_amount }}" name="invested_amount">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-2 col-form-label">PROFIT</label>
+        <div class="col-sm-10">
+    <input type="text" class="form-control my-3" aria-label="Email" value="{{ member.user_profit }}" name="user_profit">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="" class="col-sm-2 col-form-label">REFER PROFIT</label>
+        <div class="col-sm-10">
+    <input type="text" class="form-control my-3" aria-label="username" value="{{ member.user_referral_profit }}" name="user_referral_profit">
+        </div>
+        </div>
+        <div class="row mb-3">
+            <label for="" class="col-sm-2 col-form-label">Plan Name</label>
+            <div class="col-sm-10">
+    <input type="text" class="form-control my-3" aria-label="username" value="{{ member.total_profit }}" name="total_profit">
+            </div>
+        </div>
+    <button type="submit" class="btn btn-secondary">Change</button>
+</form>
+
+{% endblock %}

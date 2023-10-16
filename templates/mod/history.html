@@ -10,11 +10,16 @@ ADMIN WITHDRAW
 <br>
 <h3> {{ user.username }} </h3>
 <br>
+
 <nav>
   <ul class="pagination">
-    <li class="page-item"><a class="page-link text-light"  style="background-color: #222831;" href="{% url 'mod_history' id=user.id action='payments' %}"><i class="fa-solid fa-angles-left"></i> DEPOSIT</a></li>
+    <li class="page-item"><a class="page-link text-light"  style="background-color: #222831;" href="{% url 'mod_history' id=user.id action='payments' %}">DEPOSIT</a></li>
     <li class="page-item"><a class="page-link text-light"  style="background-color: #222831;" href="{% url 'mod_history' id=user.id action='withdraws' %}">WITHDRAWAL</a></li>
-    <li class="page-item"><a class="page-link text-light"  style="background-color: #222831;" href="{% url 'mod_history' id=user.id action='profit' %}">PROFIT <i class="fa-solid fa-angles-right"></i></a></li>
+  </ul>
+    <ul class="pagination">
+
+    <li class="page-item"><a class="page-link text-light"  style="background-color: #222831;" href="{% url 'mod_history' id=user.id action='profit' %}">PROFIT</a></li>
+    <li class="page-item"><a class="page-link text-light"  style="background-color: #222831;" href="{% url 'mod_history' id=user.id action='referral' %}">REFERRAL PROFIT</a></li>
   </ul>
 </nav>
 
@@ -23,7 +28,6 @@ ADMIN WITHDRAW
       <tr>
         <th scope="col">#</th>
         <th scope="col">AMOUNT</th>
-        <th scope="col">DATE</th>
         <th scope="col">STATUS</th>
       </tr>
     </thead>
@@ -53,8 +57,14 @@ ADMIN WITHDRAW
       <tr>
         <th scope="row">{{ forloop.counter }}</th>
         <td>{{ addprofit.profit }}</td>
-        <td>Otto</td>
-        <td></td>
+      </tr>
+      {% endfor %}
+
+      {% elif action == 'referal' %}
+      {% for addprofit in addprofits %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ addprofit.referral_profit }}</td>
       </tr>
       {% endfor %}
 

@@ -6,12 +6,15 @@ Sign Up
 
 {% block content%}
 
-<ul class="messages">
-  {% for message in messages %}
-  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-  {% endfor %}
-</ul>
 
+<div class="messages">
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  </div>
 <div class=" mx-auto" style="margin-top: 9%; width: 100%; max-width: 500px;">
     <h1 class="h1">Sign Up</h1>
 
@@ -27,5 +30,8 @@ Sign Up
         <button type="submit" class="btn btn-secondary">Sign Up</button>
         
     </form>
-</div>
+    Your password can’t be too similar to your other personal information.
+    Your password must contain at least 8 characters.
+    Your password can’t be a commonly used password.
+    Your password can’t be entirely numeric.</div>
 {% endblock %}

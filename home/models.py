@@ -46,7 +46,8 @@ class Addprofit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     plan = models.ForeignKey(Plans, on_delete=models.CASCADE)
     percentage = models.CharField(max_length=100, null=True)
-    profit = models.CharField(max_length=100)
+    profit = models.CharField(max_length=100, null=True)
+    referral_profit = models.CharField(max_length=100, null=True)
 
 class ReferralDetails(models.Model):
     
