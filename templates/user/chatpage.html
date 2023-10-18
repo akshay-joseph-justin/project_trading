@@ -1,0 +1,85 @@
+{% extends 'user/base.html' %}
+
+{% block title%}
+CHAT WITH ADMIN
+{% endblock %}
+
+{% block content%}
+
+<section style="background-color: #222831;">
+    <div class="container py-5">
+  
+      <div class="row w-100">
+
+        <div class="col-md-6 col-lg-7 col-xl-8 mx-auto my-0">
+  
+          <ul class="list-unstyled">
+            <li class="d-flex justify-content-between mb-4">
+                <div class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
+                    <i style="font-size: 2rem; color: #ff5722;" class="fa-solid fa-user"></i>
+                </div>
+              <div class="card">
+                <div class="card-header d-flex justify-content-between p-3">
+                  <p class="fw-bold mb-0">Brad Pitt</p>
+                  <p class="text-muted small mb-0"><i class="far fa-clock"></i> 12 mins ago</p>
+                </div>
+                <div class="card-body">
+                  <p class="mb-0">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="d-flex justify-content-between mb-4">
+              <div class="card w-100">
+                <div class="card-header d-flex justify-content-between p-3">
+                  <p class="fw-bold mb-0">Lara Croft</p>
+                  <p class="text-muted small mb-0"><i class="far fa-clock"></i> 13 mins ago</p>
+                </div>
+                <div class="card-body">
+                  <p class="mb-0">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                    laudantium.
+                  </p>
+                </div>
+              </div>
+              <div class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60">
+                <i style="font-size: 2rem; color: #fff;" class="fa-solid fa-user"></i>
+            </div>
+            </li>
+            <li class="d-flex justify-content-between mb-4">
+                <div class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
+                    <i style="font-size: 2rem; color: #ff5722;" class="fa-solid fa-user"></i>
+                </div>
+
+              <div class="card">
+                <div class="card-header d-flex justify-content-between p-3">
+                  <p class="fw-bold mb-0">Brad Pitt</p>
+                  <p class="text-muted small mb-0"><i class="far fa-clock"></i> 10 mins ago</p>
+                </div>
+                <div class="card-body">
+                  <p class="mb-0">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="mb-3 p-2"  style="background-color: #ff5722;">
+              <div class="form-outline d-flex align-items-center justify-content-between">
+                <textarea class="form-control text-light" id="textAreaExample2" rows="1" placeholder="Message" style="resize: none;"></textarea>
+                <button type="button" class="btn btn-secondary btn-rounded float-end">Send</button>
+              </div>
+            </li>
+          </ul>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  </section>
+
+
+{% endblock %}
