@@ -15,6 +15,7 @@ class User_plan(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     plan = models.ForeignKey(Plans, on_delete=models.CASCADE)
+    contact = models.CharField(max_length=100, null=True)
     invested_amount = models.CharField(max_length=100)
     user_status = models.CharField(max_length=100)
     user_profit = models.CharField(max_length=100)
@@ -51,6 +52,11 @@ class Addprofit(models.Model):
 
 class ReferralDetails(models.Model):
     
+    spot_percent_direct = models.CharField(max_length=100, null=True)
+    spot_percent_level_1 = models.CharField(max_length=100, null=True)
+    spot_percent_level_2 = models.CharField(max_length=100, null=True)
+    spot_percent_level_3 = models.CharField(max_length=100, null=True)
+
     percent_direct = models.CharField(max_length=100, null=True)
     percent_level_1 = models.CharField(max_length=100, null=True)
     percent_level_2 = models.CharField(max_length=100, null=True)
@@ -67,4 +73,10 @@ class Referral(models.Model):
     level_1 = models.ManyToManyField(User, blank=True, related_name="%(class)s_level1")
     level_2 = models.ManyToManyField(User, blank=True, related_name="%(class)s_level2")
     level_3 = models.ManyToManyField(User, blank=True, related_name="%(class)s_level3")
+
+class Chat(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    message = models.TextField(max_length=200, null=True)
+    replay = models.TextField(max_length=200, null=True)
 

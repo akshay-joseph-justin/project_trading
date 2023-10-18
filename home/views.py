@@ -6,6 +6,8 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
+from django.conf import settings
 
 from random import randint
 
@@ -47,6 +49,7 @@ class Signup_view(View):
         fname = request.POST["fname"]
         lname = request.POST["lname"]
         email = request.POST["signup_email"]
+        contact = request.POST["contact"]
         uname = request.POST["signup_uname"]
         passw1 = request.POST["signup_passw1"]
         passw2 = request.POST["signup_passw2"]
@@ -56,6 +59,7 @@ class Signup_view(View):
                 "fname": fname,
                 "lname": lname,
                 "email": email,
+                "contact": contact,
                 "uname": uname,
                 "referral": referral_id,
             }
@@ -94,7 +98,7 @@ class Signup_view(View):
 
         print("user created")
 
-        self.add_user_plan(request.user)
+        self.add_user_plan(request.user, contact)
         print("user_plan added")
         self.add_referral(request.user)
         print("referral added")
@@ -106,10 +110,11 @@ class Signup_view(View):
         messages.success(request, "Signup Successful")
         return redirect("/dashboard")
     
-    def add_user_plan(self, user):
+    def add_user_plan(self, user, contact):
 
         user_plan = models.User_plan()
         user_plan.user = user
+        user_plan.contact = contact
         user_plan.invested_amount = "0"
         user_plan.plan = models.Plans.objects.get(id=1)
         user_plan.user_status = "Inactive"
@@ -175,12 +180,150 @@ class Logout_view(View):
         messages.info(request, "logged out")
         return redirect("/login")
 
+class ForgotPassword_view(View):
+
+    def get(self, request):
+
+        return render(request, "forgotpassw.html")
+    
+    def post(self, request, **kwargs):
+        
+        
+        if "uname" in request.POST:
+            otp_no = randint(100000, 999999)
+            uname = request.POST["uname"]
+            email = request.POST["email"]
+
+            user = models.User.objects.get(username=uname)
+            if user.email == email:
+                
+                send_mail(
+                    "OTP for resting your password",
+                    f"your otp is {otp_no}",
+                    settings.EMAIL_HOST_USER,
+                    [user.email,],
+                    fail_silently=False,
+                )
+                context = {
+                    "otp": otp_no,
+                    "user": user.id
+                }
+
+                return render(request, "forgotpassw.html", context=context)
+            else:
+
+                messages.error(request, "email incorrect")
+                return render(request, "forgotpassw.html")
+        
+        if "otp" in request.POST:
+
+            otp = request.POST["otp"]
+            otp_no = request.POST["otp_no"]
+            id = request.POST["user"]
+
+            if otp == otp_no:
+
+                context = {
+                    "change": True,
+                    "user": id,
+                }
+
+                return render(request, "forgotpassw.html", context=context)
+            
+            else:
+                
+                context = {
+                    "otp": otp_no,
+                    "user": user.id
+                }
+                
+                messages.error(request, "OTP Incorrect")
+                return render(request, "forgotpassw.html", context=context)
+            
+        if "passw1" in request.POST:
+
+            passw1 = request.POST["passw1"]
+            passw2 = request.POST["passw2"]
+            id = request.POST["user"]
+
+            try:
+                validate_password(passw1)
+            except ValidationError:
+                context = {
+                    "chane": True,
+                    "user": id,
+                }
+                messages.error(request, "password validation error")
+                return render(request, "forgotpassw.html", context=context)
+            
+            if passw1 != passw2:
+
+                context = {
+                    "chane": True,
+                    "user": id,
+                }
+                messages.error(request, "password didnt match")
+                return render(request, "forgotpassw.html", context=context)
+
+            user = models.User.objects.get(id=id)
+            user.set_password(passw1)
+            user.save()
+            messages.success(request, "password changed")
+            return redirect("/")
+
+
+class ChangePassword_view(View):
+
+    def get(self, request):
+
+        return render(request, "changepassw.html")
+    
+    def post(self, request):
+
+        old_passw = request.POST["old_passw"]
+        passw1 = request.POST["passw1"]
+        passw2 = request.POST["passw2"]
+
+        if request.user.check_password(old_passw):
+            
+            try:
+                validate_password(passw1)
+            except ValidationError:
+                messages.error(request, "password validation error")
+                return redirect("/password/change/")
+
+            if passw1 != passw2:
+                messages.error(request, "password didnt match")
+                return redirect("/password/change/")
+            
+            user = models.User.objects.get(id=request.user.id)
+            user.set_password(passw1)
+            user.save()
+
+            messages.success(request, "password changed")
+            return redirect("/")
+
+        else:
+            messages.error(request, "current password not match")
+            return redirect("/password/change/")
 
 
 class Contact_view(View):
     
     def get(self, request):
         return render(request, 'user/contact.html')
+
+    def post(self, request):
+
+        ask = request.POST["ask"]
+
+        chat = models.Chat()
+        chat.user = request.user
+        chat.message = ask
+        chat.save()
+
+        messages.success(request, "message sended")
+        return redirect("/contact")
 
 
 class Plans_view(View):
@@ -250,6 +393,20 @@ class Refer_view(View):
         }
 
         return render(request, 'user/refer.html', context=context)
+    
+    def post(self, request):
+
+        referral_id = request.POST["referred_id"]
+
+        referrer = models.Referral.objects.get(user=request.user)
+        referred = models.Referral.objects.get(referral_id=referral_id)
+
+        referrer.referred_user = referred.user
+        referrer.save()
+        referred.direct.add(request.user)
+        referred.save()
+
+        return redirect("/refer")
 
 class Payment_view(View):
     
@@ -323,7 +480,24 @@ class History_view(View):
 class ModDashboard_view(View):
     
     def get(self,request):
-        return render(request, 'mod/index.html')
+
+        context = {
+            "chats": [chat for chat in models.Chat.objects.all() if chat.replay is None],
+        }
+        print(context)
+        return render(request, 'mod/index.html', context=context)
+    
+    def post(self, request):
+
+        replay = request.POST["replay"]
+        id = request.POST["chat_id"]
+
+        chat = models.Chat.objects.get(id=id)
+        chat.replay = replay
+        chat.save()
+
+        messages.success(request, "repalyed to message")
+        return redirect("/moderator/dashboard/")
 
 class ModMembers_view(View):
     
@@ -372,6 +546,8 @@ class ModPayments_view(View):
                         user_plan.user.is_active = True
                     user_plan.save()
 
+                    self.add_referral_profit(user_plan.user, payment.transaction_amount)
+
 
                 payment.transaction_status = "approved"
                 payment.save()
@@ -401,6 +577,54 @@ class ModPayments_view(View):
         for plan in plan_db:
             if float(amount) >= float(plan.plan_min_price) and float(amount) < float(plan.plan_max_price):
                 return plan
+            
+    def add_referral_profit(self, user, amount):
+
+        referral = models.Referral.objects.get(user=user)
+        if referral.referred_user is not None:
+            referral_1 = models.Referral.objects.get(user=referral.referred_user)
+            user_plan_1 = models.User_plan.objects.get(user=referral.referred_user)
+            addprofit = models.Addprofit()
+            addprofit.user = user
+            addprofit.plan = user_plan_1.plan
+            addprofit.referral_profit = (float(amount)*(float(referral_1.referral_details.spot_percent_direct)/100))
+            addprofit.save()
+            user_plan = models.User_plan.objects.get(user=referral.referred_user)
+            user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_1.referral_details.spot_percent_direct)/100))
+            user_plan.save()
+            if referral_1.referred_user is not None:
+                referral_2 = models.Referral.objects.get(user=referral_1.referred_user)
+                user_plan_2 = models.User_plan.objects.get(user=referral_1.referred_user)
+                addprofit = models.Addprofit()
+                addprofit.user = user
+                addprofit.plan = user_plan_2.plan
+                addprofit.referral_profit = (float(amount)*(float(referral_2.referral_details.spot_percent_level_1)/100))
+                addprofit.save()
+                user_plan = models.User_plan.objects.get(user=referral_1.referred_user)
+                user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_2.referral_details.spot_percent_level_1)/100))
+                user_plan.save()
+                if referral_2.referred_user is not None:
+                    referral_3 = models.Referral.objects.get(user=referral_2.referred_user)
+                    user_plan_3 = models.User_plan.objects.get(user=referral_2.referred_user)
+                    addprofit = models.Addprofit()
+                    addprofit.user = user
+                    addprofit.plan = user_plan_3.plan
+                    addprofit.referral_profit = (float(amount)*(float(referral_3.referral_details.spot_percent_level_2)/100))
+                    addprofit.save()
+                    user_plan = models.User_plan.objects.get(user=referral_2.referred_user)
+                    user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_3.referral_details.spot_percent_level_2)/100))
+                    user_plan.save()
+                    if referral_3.referred_user is not None:
+                        referral_4 = models.Referral.objects.get(user=referral_3.referred_user)
+                        user_plan_4 = models.User_plan.objects.get(user=referral_3.referred_user)
+                        addprofit = models.Addprofit()
+                        addprofit.user = user
+                        addprofit.plan = user_plan_4.plan
+                        addprofit.referral_profit = (float(amount)*(float(referral_4.referral_details.spot_percent_level_3)/100))
+                        addprofit.save()
+                        user_plan = models.User_plan.objects.get(user=referral_3.referred_user)
+                        user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_4.referral_details.spot_percent_level_3)/100))
+                        user_plan.save()
 
 class ModWithdraw_view(View):
     

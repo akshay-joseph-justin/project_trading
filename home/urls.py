@@ -8,7 +8,6 @@ urlpatterns = [
     path('', login_required(views.Index_view.as_view()), name='home'),
 
     path('dashboard/', login_required(views.Dashboard_view.as_view()), name='user_dashboard'),
-    # path('yourplan/', login_required(views.Yourplan_view.as_view()), name='yourplan'),
     path('profit/', login_required(views.Profit_view.as_view()), name='profit'),
     path('refer/', login_required(views.Refer_view.as_view()), name='refer'),
     path('profile/', login_required(views.Profile_view.as_view()), name='profile'),
@@ -37,4 +36,6 @@ urlpatterns = [
     path('signup/', views.Signup_view.as_view(), name='signup'),
     path('login/', views.Login_view.as_view(), name='login'),
     path('logout/', login_required(views.Logout_view.as_view()), name='logout'),
+    path('password/forgot/', views.ForgotPassword_view.as_view(), name='passw_forgot'),
+    path('password/change/', login_required(views.ChangePassword_view.as_view()), name='passw_change'),
 ]

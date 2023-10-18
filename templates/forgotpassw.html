@@ -1,0 +1,79 @@
+{% extends 'user/base.html' %}
+
+{% block title%}
+Forgot Password
+{% endblock %}
+
+{% block content%}
+
+<div class="messages">
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+</div>
+{% if not change and not otp %}
+<div class=" mx-auto" style="margin-top: 10em; width: 100%; max-width: 500px;">
+    <h1 class="h1">Forgot Password</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row mb-3">
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPassword3" name="uname" placeholder="Username">
+          </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputPassword3" name="email" placeholder="Email">
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </div>
+    </form>
+</div>
+{% endif %}
+{% if otp %}
+<div class=" mx-auto" style="margin-top: 10em; width: 100%; max-width: 500px;">
+    <h1 class="h1">Forgot Password</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row mb-3">
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPassword3" name="otp" placeholder="OTP">
+          </div>
+        </div>
+        <input type="hidden" value={{ otp }} name="otp_no">
+        <input type="hidden" value={{ user }} name="user">
+        <div class="col-12">
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </div>
+    </form>
+</div>
+{% endif %}
+
+{% if change %}
+<div class=" mx-auto" style="margin-top: 10em; width: 100%; max-width: 500px;">
+    <h1 class="h1">Change Password</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row mb-3">
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3" name="passw1" placeholder="password">
+          </div>
+        </div>
+        <input type="hidden" value={{ user }} name="user">
+        <div class="row mb-3">
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword3" name="passw2" placeholder="confirm password">
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </div>
+    </form>
+</div>
+{% endif %}
+{% endblock %}

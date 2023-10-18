@@ -7,19 +7,32 @@ REFER
 {% block content%}
 <div>
 <h1> REFER </h1>
+
 <div class="row">
     <div class="col-md">
         <div class="card" style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 5px; transition: transform 0.2s; background-color: #2d4059;">
             <div class="card-header text-light">
-                Refferal ID :- james@123
+                Refferal ID :- {{ refer.referral_id }}
             </div>
+            {% if refer.referred_user %}
             <ul class="list-group list-group-flush">
-              <li class="list-group-item text-light" style="background-color: #2d4059;">Reffered by john</li>
-              <li class="list-group-item text-light" style="background-color: #2d4059;">Reffered members :- david</li>
+              <li class="list-group-item text-light" style="background-color: #2d4059;">Reffered by {{ refer.referred_user }}</li>
+              <li class="list-group-item text-light" style="background-color: #2d4059;">Reffered members :-</li>
+              {% for member in members %}
+              <li class="list-group-item text-light" style="background-color: #2d4059;">{{ member.username }}</li>
+              {% endfor %}
             </ul>
+            {% else %}
+            <form method="POST">
+              {% csrf_token %}
+              <input type="text" placeholder="Referal ID" name="referred_id">
+              <input type="submit" value="ADD">
+            </form>
+            {% endif %}
           </div>
     </div>
 </div>
+
 </div>
 
 {% endblock %}
