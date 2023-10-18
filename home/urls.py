@@ -16,7 +16,7 @@ urlpatterns = [
     path('withdraw/', login_required(views.Withdraw_view.as_view()), name='withdraw'),
     path('payment/', login_required(views.Payment_view.as_view()), name='payment'),
     path('plans/', login_required(views.Plans_view.as_view()), name='plans'),
-    path('contact/', login_required(views.Contact_view.as_view()), name='contact'),
+    path('chat/', login_required(views.Chat_view.as_view()), name='chat'),
 
     path('moderator/dashboard/', login_required(views.ModDashboard_view.as_view()), name='mod_dashboard'),
     path('moderator/members/', login_required(views.ModMembers_view.as_view()), name='mod_mambers'),

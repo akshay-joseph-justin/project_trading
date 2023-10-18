@@ -309,22 +309,27 @@ class ChangePassword_view(View):
             return redirect("/password/change/")
 
 
-class Contact_view(View):
+class Chat_view(View):
     
     def get(self, request):
-        return render(request, 'user/contact.html')
+
+        context = {
+            "chats": models.Chat.objects.filter(user=request.user)[::-1],
+        }
+
+        return render(request, 'user/chatpage.html', context=context)
 
     def post(self, request):
 
-        ask = request.POST["ask"]
+        message = request.POST["message"]
 
         chat = models.Chat()
         chat.user = request.user
-        chat.message = ask
+        chat.message = message
         chat.save()
 
         messages.success(request, "message sended")
-        return redirect("/contact")
+        return redirect("/chat")
 
 
 class Plans_view(View):
