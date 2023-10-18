@@ -1,15 +1,12 @@
 <div class="sidenav" style="background-color: #222831; border-right: 2px solid #2d4059;">
-    <div class="sidenav-header py-3" style="background-color: #2d4059;">
+    {% if user.is_authenticated %}
+    <div class="sidenav-header py-3" style="background-color: #2d4059; height: 88px;">
         <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
         <div class="dropdown">
-            {% if user.is_authenticated %}
-            <button onclick="myFunction()" class="dropbtn"> {{ user.username }} <i class="fa-solid fa-angle-down"></i></button>
-            {% else %}
-            <button onclick="myFunction()" class="dropbtn"> Join Now <i class="fa-solid fa-angle-down"></i></button>
-            {% endif %}
+            <button onclick="myFunction()" class="dropbtn p-2"> {{ user.username }} <i class="fa-solid fa-angle-down"></i></button>
+            
             <div id="myDropdown" class="dropdown-content">
                 <ul>
-                    {% if user.is_authenticated %}
                     <li class="list-item py-2" >
                         
                         <a href="{% url 'profile' %}" class="text-dark"><i class="fa-solid fa-user"></i> Profile</a>
@@ -17,20 +14,13 @@
                     <li class="list-item py-2">
                         <a href="{% url 'logout' %}" class="text-dark"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                     </li>
-                    {% else %}
-                    <li class="list-item py-2">
-                        <a href="{% url 'signup' %}" class="text-dark">Sign Up</a>
-                    </li>
-                    <li class="list-item py-2">
-                        <a href="{% url 'login' %}" class="text-dark">Log In</a>
-                    </li>
-                    {% endif %}
+                    
                 </ul>
-            
             </div>
           </div>
         
     </div>
+
     <ul style=" background-color: #222831;" class="py-4">
         <li class="list-item">
             <a class="nav-item py-3" href="{% url 'user_dashboard' %}">
@@ -74,5 +64,14 @@
         </li>
           <!-- Add more menu items here -->
       </ul>
+        {% else %}
+        <div style="background-color: #ff5722; height: 100%; width: 100%;"  class="d-flex justify-content-center align-items-center">
+            <div>
 
-</div>
+                <h1 class="display-4 text-center text-light">AI</h1>
+                <h1 class="display-4 text-center text-light">FX</h1>
+            </div>
+        </div>
+      
+      {% endif %}
+    </div>
