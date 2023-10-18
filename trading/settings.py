@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -130,10 +131,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = "/login/"
 LOGOUT_REDIRECT_URL = "/login/"
 
+
+load_dotenv()
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-# EMAIL_HOST_USER = "[EMAIL ID]"
-# EMAIL_HOST_PASSWORD = "[google smtp password]"
+EMAIL_HOST_USER = os.getenv("CLEMAIL")
+EMAIL_HOST_PASSWORD = os.getenv("CLSMTP")
 

@@ -196,13 +196,29 @@ class ForgotPassword_view(View):
             email = request.POST["email"]
 
             user = models.User.objects.get(username=uname)
-            if user.email == email:
+            if email == email:
                 
+                subject = "Your OTP for AIFX"
+                message = f"""
+Dear {user.username},
+Your OTP to reset your account password on Aifx. Please find your OTP below:
+
+OTP: {otp_no}
+
+Please note that this OTP is valid for a single use and will expire after a certain period. For security reasons, we recommend using this OTP as soon as possible.
+
+If you did not request this OTP or have any concerns about your account security, please contact our support team.
+
+Thank you for using AIFX. We prioritize your account security and are committed to providing you with a safe and secure experience.
+
+Best regards,
+"""
+
                 send_mail(
-                    "OTP for resting your password",
-                    f"your otp is {otp_no}",
+                    subject,
+                    message,
                     settings.EMAIL_HOST_USER,
-                    [user.email,],
+                    ["akshayjosephjustin721@gmail.com",],
                     fail_silently=False,
                 )
                 context = {
