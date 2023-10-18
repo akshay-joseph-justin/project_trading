@@ -120,6 +120,7 @@ class Signup_view(View):
         user_plan.user_status = "Inactive"
         user_plan.user_profit = "0"
         user_plan.user_referral_profit = "0"
+        user_plan.days = "0"
         user_plan.save()
 
     def add_referral(self, user):
