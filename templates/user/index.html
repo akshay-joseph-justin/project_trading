@@ -35,7 +35,7 @@ Home
             </div>
         </div>
     </div>
-        {% endif %}
+        {% else %}
         <div class="col-md">
             <div class="card text-white mb-3 custom-link" style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 5px; transition: transform 0.2s; background-color: #2d4059;">
                 <div class="card-body">
@@ -54,6 +54,7 @@ Home
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
         {% endif %}
         <br>
@@ -103,5 +104,5 @@ Home
         {% endif %}
     {% endfor %}
     {% endif %}
-    {% endblock %}
 </div>
+    {% endblock %}
