@@ -5,10 +5,26 @@
 MY PROFILE
 {% endblock %}
 
-{% block content%}
-<div>
-<h1>MY PROFILE</h1><br>
-
-<h4></h4>
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-header" style="background-color: #ff5622; color: #fff;">
+          <h3>Profile Page</h3>
+        </div>
+        <div class="card-body" style="background-color: #2d4059; color: #fff;">
+          <h4>Welcome, {{ user.username }}</h4>
+          <ul class="list-group">
+            <li class="list-group-item" style="background-color: #222831; color: #fff;">Full Name: {{ user.get_full_name }}</li>
+            <li class="list-group-item" style="background-color: #222831; color: #fff;">Email: {{ user.email }}</li>
+            <li class="list-group-item" style="background-color: #222831; color: #fff;">Mobile No.: {{ user.number }}</li>
+            <!-- Add more user information here -->
+          </ul>
+          <a href="#" class="btn btn-secondary mt-3">Edit Profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
