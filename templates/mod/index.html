@@ -14,9 +14,9 @@ ADMIN DASHBOARD
 <h2>{{ chat.message }}</h2>
 <form method="POST">
      {% csrf_token %}
-     <input type="text" placeholder="Replay" name="replay">
-     <input type="hidden" value="{{ chat.id }}" name="chat_id">
-     <input type="submit" value="Replay">
+     <input required type="text" placeholder="Replay" name="replay">
+     <input required type="hidden" value="{{ chat.id }}" name="chat_id">
+     <input required type="submit" value="Replay">
 </form>
 {% endfor %}
 

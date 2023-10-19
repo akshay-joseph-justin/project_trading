@@ -36,6 +36,24 @@ Home
         </div>
     </div>
         {% endif %}
+        <div class="col-md">
+            <div class="card text-white mb-3 custom-link" style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 5px; transition: transform 0.2s; background-color: #2d4059;">
+                <div class="card-body">
+                    <h4 class="card-title text-center"><strong>Plan Name</strong></h4>
+                    <h4 class="card-title text-center"><strong>$ invest amount</strong></h4>
+                    <p class="card-text text-center" style="font-size: 1.2em;">(min% - max%)</p>
+                    <br>
+                    <!--<p class="card-text text-center" style="font-size: 1.2em;">AMOUNT - {{ user_plan.invested_amount }}</p>-->
+                    <p class="card-text text-center" style="font-size: 1.2em;">TOTAL DAYS - </p>
+                    <p class="card-text text-center" style="font-size: 1.2em;">Total Profit - user profit</p>
+                    <p class="card-text text-center" style="font-size: 1.2em;">Status - user status</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-secondary my-0 mx-auto">Invest</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endfor %}
         {% endif %}
         <br>

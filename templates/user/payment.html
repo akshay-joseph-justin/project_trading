@@ -26,15 +26,15 @@ PAYMENT
             {% csrf_token %}
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label text-white">NAME</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter your name" name="transaction_name">
+                <input required type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter your name" name="transaction_name">
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label text-white">TRANSACTION ID</label>
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter transaction ID" name="transaction_id">
+                <input required type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter transaction ID" name="transaction_id">
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput3" class="form-label text-white">AMOUNT</label>
-                <input type="number" class="form-control" id="formGroupExampleInput3" placeholder="Enter amount" name="amount">
+                <input required type="number" class="form-control" id="formGroupExampleInput3" placeholder="Enter amount" name="amount">
             </div>
             <div class="col-12 text-center">
                 <button type="submit" class="btn btn-secondary">SUBMIT</button>
