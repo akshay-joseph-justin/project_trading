@@ -479,8 +479,34 @@ class Payment_view(View):
     
 class Profile_view(View):
     
-    def get(self,request):
+    def get(self,request, **kwargs):
+
+        context = {}
+
+        if "id" in kwargs:
+            return render(request, "user/updateprofile.html")
+
         return render(request, 'user/profile.html')
+    
+    def post(self, request, **kwargs):
+
+        fname = request.POST["fname"]
+        lname = request.POST["lname"]
+        uname = request.POST["uname"]
+        email = request.POST["up_email"]
+        contact = request.POST["contact"]
+
+        user = models.User.objects.get(id=request.user.id)
+        user.first_name = fname
+        user.last_name = lname
+        user.username = uname
+        user.email = email
+        user.save()
+        user_plan = models.User_plan.objects.get(user=user)
+        user_plan.contact = contact
+        user_plan.save()
+
+        return redirect("/profile")
 
 class History_view(View):
     
@@ -976,7 +1002,7 @@ class ModChat_view(View):
         
         context = {
             "members": [member for member in models.User.objects.all() if not member.is_superuser ],
-            "chats": models.Chat.objects.filter(user=user),
+            "chats": models.Chat.objects.filter(user=user)[::-1],
         }
 
         return render(request, "mod/chat.html", context=context)

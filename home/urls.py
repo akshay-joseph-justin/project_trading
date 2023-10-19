@@ -11,6 +11,7 @@ urlpatterns = [
     path('profit/', login_required(views.Profit_view.as_view()), name='profit'),
     path('refer/', login_required(views.Refer_view.as_view()), name='refer'),
     path('profile/', login_required(views.Profile_view.as_view()), name='profile'),
+    path('profile/update/<int:id>', login_required(views.Profile_view.as_view()), name='profile_update'),
     path('history/<str:action>', login_required(views.History_view.as_view()), name='history'),
     
     path('withdraw/', login_required(views.Withdraw_view.as_view()), name='withdraw'),
@@ -32,7 +33,8 @@ urlpatterns = [
     path('moderator/plans/', login_required(views.ModPlans_view.as_view()), name='mod_plans'),
     path('moderator/editplan/<int:plan_id>', login_required(views.ModEditPlan_view.as_view()), name='mod_edit_plan'),
     path('history/<int:id>/<str:action>', login_required(views.History_view.as_view()), name='mod_history'),
-    path('moderator/chat/<int:id>', login_required(views.ModChat_view.as_view()), name='mod_chat'),
+    path('moderator/chat/', login_required(views.ModChat_view.as_view()), name='mod_chat'),
+    path('moderator/chat/<int:id>', login_required(views.ModChat_view.as_view()), name='mod_user_chat'),
 
     path('signup/', views.Signup_view.as_view(), name='signup'),
     path('login/', views.Login_view.as_view(), name='login'),
