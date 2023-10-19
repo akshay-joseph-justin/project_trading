@@ -31,31 +31,31 @@ ADMIN ADD PLAN
     <div class="row mb-3">
       <label for="" class="col-sm-2 col-form-label">Plan Name</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="" name="plan_name" value={{ plan.plan_name|default:"" }}>
+        <input required type="text" class="form-control" id="" name="plan_name" value={{ plan.plan_name|default:"" }}>
       </div>
     </div>
     <div class="row mb-3">
         <label for="" class="col-sm-2 col-form-label">Min Amount</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="" name="plan_min_price" value={{ plan.plan_min_price|default:"" }}>
+          <input required type="text" class="form-control" id="" name="plan_min_price" value={{ plan.plan_min_price|default:"" }}>
         </div>
       </div>
       <div class="row mb-3">
         <label for="" class="col-sm-2 col-form-label">Max Amount</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="" name="plan_max_price" value={{ plan.plan_max_price|default:"" }}>
+          <input required type="text" class="form-control" id="" name="plan_max_price" value={{ plan.plan_max_price|default:"" }}>
         </div>
       </div>
       <div class="row mb-3">
         <label for="" class="col-sm-2 col-form-label">Min Percentage</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="" name="plan_min_percentage" value={{ plan.plan_min_percentage|default:"" }}>
+          <input required type="text" class="form-control" id="" name="plan_min_percentage" value={{ plan.plan_min_percentage|default:"" }}>
         </div>
       </div>
       <div class="row mb-3">
         <label for="" class="col-sm-2 col-form-label">Max Percentage</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="" name="plan_max_percentage" value={{ plan.plan_max_percentage|default:"" }}>
+          <input required type="text" class="form-control" id="" name="plan_max_percentage" value={{ plan.plan_max_percentage|default:"" }}>
         </div>
       </div>
     <button type="submit" class="btn btn-secondary">Add</button>

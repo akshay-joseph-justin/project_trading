@@ -19,12 +19,12 @@ Sign Up
     <h1 class="h1">Sign Up</h1>
         <form method="POST">
             {% csrf_token %}
-            <input type="text" class="form-control my-3" placeholder="First name" aria-label="First name" value="{{ fname | default:'' }}" name="fname">
-            <input type="text" class="form-control my-3" placeholder="Last name" aria-label="Last name" value="{{ lname | default:'' }}" name="lname">
-            <input type="email" class="form-control my-3" placeholder="Email" aria-label="Email" value="{{ email | default:'' }}" name="signup_email">
-            <input type="tel" class="form-control my-3" placeholder="Contact Number" aria-label="Email" value="{{ contact | default:'' }}" name="contact">
-            <input type="username" class="form-control my-3" placeholder="username" aria-label="username" value="{{ uname | default:'' }}" name="signup_uname">
-            <input type="password" class="form-control my-3" placeholder="password" aria-label="password" name="signup_passw1" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="Your password can’t be too similar to your other personal information. Your password must contain at least 8 characters. Your password can’t be a commonly used password. Your password can’t be entirely numeric.">
+            <input type="text" class="form-control my-3" placeholder="First name" aria-label="First name" value="{{ fname | default:'' }}" name="fname" required>
+            <input type="text" class="form-control my-3" placeholder="Last name" aria-label="Last name" value="{{ lname | default:'' }}" name="lname" required>
+            <input type="email" class="form-control my-3" placeholder="Email" aria-label="Email" value="{{ email | default:'' }}" name="signup_email" required>
+            <input type="tel" class="form-control my-3" placeholder="Contact Number" aria-label="Email" value="{{ contact | default:'' }}" name="contact" required>
+            <input type="username" class="form-control my-3" placeholder="username" aria-label="username" value="{{ uname | default:'' }}" name="signup_uname" required>
+            <input type="password" class="form-control my-3" placeholder="password" aria-label="password" name="signup_passw1" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="Your password can’t be too similar to your other personal information. Your password must contain at least 8 characters. Your password can’t be a commonly used password. Your password can’t be entirely numeric." required>
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <p>    Your password can’t be too similar to your other personal information.
                     Your password must contain at least 8 characters.
@@ -32,7 +32,7 @@ Sign Up
                     Your password can’t be entirely numeric.</p>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
-    <input type="password" class="form-control my-3" placeholder="confirm password" aria-label="confirm password" name="signup_passw2" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="Enter the same password you typed above.">
+    <input type="password" class="form-control my-3" placeholder="confirm password" aria-label="confirm password" name="signup_passw2" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="Enter the same password you typed above." required>
     
             <input type="text" class="form-control my-3" placeholder="Referral ID" aria-label="username" value="{{ referral | default:'' }}" name="referral_id">
             <button type="submit" class="btn btn-secondary">Sign Up</button>
