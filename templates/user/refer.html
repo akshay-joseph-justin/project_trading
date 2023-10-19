@@ -10,7 +10,7 @@ REFER
 
 <div class="row">
     <div class="col-md">
-        <div class="card" style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 5px; transition: transform 0.2s; background-color: #2d4059;">
+        <div class="card p-3" style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 5px; transition: transform 0.2s; background-color: #2d4059;">
             <div class="card-header text-light">
                 Refferal ID :- {{ refer.referral_id }}
             </div>
@@ -25,8 +25,8 @@ REFER
             {% else %}
             <form method="POST">
               {% csrf_token %}
-              <input type="text" placeholder="Referal ID" name="referred_id">
-              <input type="submit" value="ADD">
+              <input type="text" placeholder="Referal ID" name="referred_id" class="w-100 mb-2">
+              <input type="submit" value="ADD" class="btn btn-secondary w-100">
             </form>
             {% endif %}
           </div>

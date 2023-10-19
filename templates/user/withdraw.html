@@ -5,6 +5,14 @@ WITHDRAW
 {% endblock %}
 
 {% block content%}
+<div class="messages">
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+</div>
 <div>
     <div class="row">
         <div class="col-md px-3 my-3">
@@ -36,10 +44,6 @@ WITHDRAW
         
     </div>
 </div>
-<ul class="messages">
-{% for message in messages %}
-<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-{% endfor %}
-</ul>
+
     
 {% endblock %}
