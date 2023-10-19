@@ -14,31 +14,31 @@ Log In
   </div>
   {% endfor %}
   </div>
-<div class=" mx-auto" style="margin-top: 10em; width: 100%; max-width: 500px;">
-    <h1 class="h1">Sign In</h1>
+  <div class="d-flex align-items-center justify-content-center" style="height: 90vh;">
+
+    <div style="width: 100%; max-width: 500px;">
+      <h1 class="h1">Sign In</h1>
     <form method="POST">
-        {% csrf_token %}
+      {% csrf_token %}
         <div class="row mb-3">
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail3" name="login_uname" placeholder="Username">
+            <input type="text" class="form-control" id="inputEmail3" name="login_uname" placeholder="Username" required>
           </div>
         </div>
         <div class="row mb-3">
           <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" name="login_passw" placeholder="password">
+            <input type="password" class="form-control" id="inputPassword3" name="login_passw" placeholder="password" required>
           </div>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-secondary">Log In</button>
           </div>
-          <div>
-            <a href="{% url 'signup' %}" class="text-dark">Sign Up</a>
-
-          </div>
+<br>
           <a href="{% url 'passw_forgot' %}" style="color: #ff5722;">Forgot password ?</a><br>
             Dont have an account? <a href="{% url 'signup' %}" style="color: #ff5722;">Sign Up</a>
             </div>
           </div>
       </form>
     </div>
+  </div>
 {% endblock %}

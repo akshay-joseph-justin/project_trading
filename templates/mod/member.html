@@ -26,31 +26,31 @@
     <div class="row mb-3">
         <label for="" class="col-sm-2 col-form-label">USERNAME</label>
         <div class="col-sm-10">
-    <input type="text" class="form-control my-3" aria-label="First name" value="{{ member.user.username }}" name="uname">
+    <input required type="text" class="form-control my-3" aria-label="First name" value="{{ member.user.username }}" name="uname">
         </div>
     </div>
     <div class="row mb-3">
         <label for="" class="col-sm-2 col-form-label">AMOUNT</label>
         <div class="col-sm-10">
-    <input type="text" class="form-control my-3" aria-label="Last name" value="{{ member.invested_amount }}" name="invested_amount">
+    <input required type="text" class="form-control my-3" aria-label="Last name" value="{{ member.invested_amount }}" name="invested_amount">
         </div>
     </div>
     <div class="row mb-3">
         <label for="" class="col-sm-2 col-form-label">PROFIT</label>
         <div class="col-sm-10">
-    <input type="text" class="form-control my-3" aria-label="Email" value="{{ member.user_profit }}" name="user_profit">
+    <input required type="text" class="form-control my-3" aria-label="Email" value="{{ member.user_profit }}" name="user_profit">
         </div>
     </div>
     <div class="row mb-3">
         <label for="" class="col-sm-2 col-form-label">REFER PROFIT</label>
         <div class="col-sm-10">
-    <input type="text" class="form-control my-3" aria-label="username" value="{{ member.user_referral_profit }}" name="user_referral_profit">
+    <input required type="text" class="form-control my-3" aria-label="username" value="{{ member.user_referral_profit }}" name="user_referral_profit">
         </div>
         </div>
         <div class="row mb-3">
             <label for="" class="col-sm-2 col-form-label">Plan Name</label>
             <div class="col-sm-10">
-    <input type="text" class="form-control my-3" aria-label="username" value="{{ member.total_profit }}" name="total_profit">
+    <input required type="text" class="form-control my-3" aria-label="username" value="{{ member.total_profit }}" name="total_profit">
             </div>
         </div>
     <button type="submit" class="btn btn-secondary">Change</button>

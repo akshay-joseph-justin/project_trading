@@ -27,7 +27,7 @@ ADMIN ADD PROFIT
         {% csrf_token %}
         <div class="row">
           <div class="col" >
-            <!-- <input type="text" class="form-control" placeholder="PLAN NAME" aria-label="First name" name="plan_name"> -->
+            <!-- <input required type="text" class="form-control" placeholder="PLAN NAME" aria-label="First name" name="plan_name"> -->
             <div style="background-color: #eeeeee; border-radius: 7px; color: black;">
     
               <select id="plans" style="width: 100%; height: 40px; border-radius: inherit;" name="plan_name">
@@ -40,8 +40,8 @@ ADMIN ADD PROFIT
             </div>
           </div>
         </div>
-        <input type="text" class="form-control my-2" placeholder="PERCENTAGE" aria-label="PERCENTAGE" name="percentage">
-        <input type="text" class="form-control my-2" placeholder="DAYS" aria-label="DAYS" name="days">
+        <input required type="text" class="form-control my-2" placeholder="PERCENTAGE" aria-label="PERCENTAGE" name="percentage">
+        <input required type="text" class="form-control my-2" placeholder="DAYS" aria-label="DAYS" name="days">
         <button type="submit" class="btn btn-secondary">ADD</button>
       </form>
     </div>
@@ -66,8 +66,8 @@ ADMIN ADD PROFIT
             </div>      
           </div>
         </div>
-        <input type="text" class="form-control my-2" placeholder="AMOUNT" aria-label="PERCENTAGE" name="amount">
-        <input type="text" class="form-control my-2" placeholder="DAYS" aria-label="DAYS" name="days">
+        <input required type="text" class="form-control my-2" placeholder="AMOUNT" aria-label="PERCENTAGE" name="amount">
+        <input required type="text" class="form-control my-2" placeholder="DAYS" aria-label="DAYS" name="days">
         <button type="submit" class="btn btn-secondary">ADD</button>
       </form>
     </div>
