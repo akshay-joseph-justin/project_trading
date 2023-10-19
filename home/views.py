@@ -80,6 +80,12 @@ class Signup_view(View):
             return redirect("/signup")
         
         try:
+            int(contact)
+        except:
+            messages.error(request, "not a valid contact number")
+            return redirect("/signup")
+        
+        try:
             validate_password(passw1)
         except ValidationError:
             messages.error(request, "password validation error")
@@ -104,8 +110,12 @@ class Signup_view(View):
         print("referral added")
         print(f"refer [{referral_id}]")
         if len(referral_id) > 5:
-            self.add_referred(request.user, referral_id)
-            print("referral tree")
+            if models.Referral.objects.filter(referral_id=id).exists():
+                self.add_referred(request.user, referral_id)
+                print("referral tree")
+            else:
+                messages.error(request, "Referral number did not exists")
+                return redirect("/signup")
 
         messages.success(request, "Signup Successful")
         return redirect("/dashboard")
@@ -159,7 +169,7 @@ class Login_view(View):
         return render(request, 'login.html')
     
     def post(self, request):
-        
+
         uname = request.POST["login_uname"]
         passw = request.POST["login_passw"]
         user = authenticate(username=uname, password=passw)
@@ -419,6 +429,10 @@ class Refer_view(View):
     def post(self, request):
 
         referral_id = request.POST["referred_id"]
+
+        if not models.Referral.objects.filter(referral_id=referral_id):
+
+            return redirect("/refer")
 
         referrer = models.Referral.objects.get(user=request.user)
         referred = models.Referral.objects.get(referral_id=referral_id)
