@@ -962,3 +962,22 @@ class ModMember_view(View):
         messages.info(request, "changes applied")
         return redirect(f"/moderator/member/{user.id}")
 
+class ModChat_view(View):
+
+    def get(self, request, **kwargs):
+
+        if not request.user.is_superuser:
+            raise Http404
+
+        if "id" in kwargs:
+            user = models.User.objects.get(id=kwargs["id"])
+        else:
+            user = request.user
+        
+        context = {
+            "members": [member for member in models.User.objects.all() if not member.is_superuser ],
+            "chats": models.Chat.objects.filter(user=user),
+        }
+
+        return render(request, "mod/chat.html", context=context)
+
