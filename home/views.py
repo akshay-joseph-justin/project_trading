@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import Http404
 
 from random import randint
 
@@ -511,11 +512,12 @@ class History_view(View):
         return render(request, 'user/history.html', context=context)
 
 
-
-
 class ModDashboard_view(View):
     
     def get(self,request):
+
+        if not request.user.is_superuser:
+            raise Http404()
 
         context = {
             "chats": [chat for chat in models.Chat.objects.all() if chat.replay is None],
@@ -524,6 +526,9 @@ class ModDashboard_view(View):
         return render(request, 'mod/index.html', context=context)
     
     def post(self, request):
+
+        if not request.user.is_superuser:
+            raise Http404
 
         replay = request.POST["replay"]
         id = request.POST["chat_id"]
@@ -538,6 +543,9 @@ class ModDashboard_view(View):
 class ModMembers_view(View):
     
     def get(self, request, **kwargs):
+
+        if not request.user.is_superuser:
+            raise Http404
 
         if "status" in kwargs:
             
@@ -557,6 +565,9 @@ class ModMembers_view(View):
 class ModPayments_view(View):
     
     def get(self,request, **kwargs):
+
+        if not request.user.is_superuser:
+            raise Http404
 
         action = kwargs["action"]
         
@@ -666,6 +677,9 @@ class ModWithdraw_view(View):
     
     def get(self,request, **kwargs):
 
+        if not request.user.is_superuser:
+            raise Http404
+
         if "id" in kwargs:
 
             withdraw_id = kwargs["id"]
@@ -703,9 +717,16 @@ class ModWithdraw_view(View):
 class ModAddPlan_view(View):
     
     def get(self,request):
+
+        if not request.user.is_superuser:
+            raise Http404
+        
         return render(request, 'mod/addplan.html')
     
     def post(self, request):
+
+        if not request.user.is_superuser:
+            raise Http404
 
         plan_name = request.POST["plan_name"]
         plan_min_percentage = request.POST["plan_min_percentage"]
@@ -743,6 +764,9 @@ class ModPlans_view(View):
     
     def get(self,request):
 
+        if not request.user.is_superuser:
+            raise Http404
+
         context = {
             "plans": models.Plans.objects.all()
         }
@@ -753,6 +777,9 @@ class ModEditPlan_view(View):
 
     def get(self, request, plan_id):
 
+        if not request.user.is_superuser:
+            raise Http404
+
         context = {
             "plan": models.Plans.objects.get(id=plan_id),
             "edit": None,
@@ -760,6 +787,9 @@ class ModEditPlan_view(View):
         return render(request, "mod/addplan.html", context=context)
     
     def post(self, request, plan_id):
+
+        if not request.user.is_superuser:
+            raise Http404
         
         plan_name = request.POST["plan_name"]
         plan_min_percentage = request.POST["plan_min_percentage"]
@@ -782,6 +812,9 @@ class ModAddProfit_view(View):
     
     def get(self,request):
 
+        if not request.user.is_superuser:
+            raise Http404
+
         context = {
             "plans": models.Plans.objects.all(),
             "members": [member for member in models.User.objects.all() if not member.is_superuser]
@@ -790,6 +823,9 @@ class ModAddProfit_view(View):
         return render(request, 'mod/addprofit.html', context=context)
     
     def post(self, request):
+
+        if not request.user.is_superuser:
+            raise Http404
 
         plan_name = request.POST.get("plan_name", None)
         percentage = request.POST.get("percentage", None)
@@ -896,6 +932,9 @@ class ModMember_view(View):
 
     def get(self, request, id):
 
+        if not request.user.is_superuser:
+            raise Http404
+
         user = models.User.objects.get(id=id)
 
         context = {
@@ -905,6 +944,9 @@ class ModMember_view(View):
         return render(request, "mod/member.html", context=context)
     
     def post(self, request, **kwargs):
+
+        if not request.user.is_superuser:
+            raise Http404
 
         uname = request.POST["uname"]
         user_profit = request.POST["user_profit"]
