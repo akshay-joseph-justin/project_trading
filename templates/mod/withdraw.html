@@ -35,6 +35,8 @@ ADMIN WITHDRAW
         <th scope="col">NAME</th>
         <th scope="col">ACC NO/ WALLET ID</th>
         <th scope="col">IFSC CODE</th>
+        <th scope="col">DATE</th>
+        <th scope="col">TIME</th>
         <th scope="col">STATUS</th>
         {% if status == 'pending' %}
         <th scope="col">ACTION</th>
@@ -58,6 +60,8 @@ ADMIN WITHDRAW
         {{ withdraw.ifsc_code }}
         {% endif %}
         </td>
+        <td>{{ withdraw.date }}</td>
+        <td></td>
         <td>{{ withdraw.withdraw_status }}</td>
         <td>
           {% if withdraw.withdraw_status == 'pending' %}

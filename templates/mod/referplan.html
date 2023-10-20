@@ -1,0 +1,62 @@
+{% extends 'mod/admbase.html' %}
+
+{% block title%}
+REFER PLAN
+{% endblock %}
+
+{% block content%}
+
+
+<div class="messages">
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  </div>
+<div>
+<h1>REFER PLAN</h1>
+<br>
+<div class="row">
+  <div class="col-md">
+    <div>
+      <h2 class="h2">SPOT REFER</h2>
+    
+      <form class=" g-3" style="width: 100%; max-width: 400px;" method="POST">
+        {% csrf_token %}
+        <label>DIRECT</label>
+        <input required type="text" class="form-control my-2" placeholder="SPOT" aria-label="PERCENTAGE" value="{{ details.spot_percent_direct }}" name="spot_percent_direct">
+        <label>LEVEL 1</label>
+        <input required type="text" class="form-control my-2" placeholder="LEVEL 1" aria-label="PERCENTAGE" value="{{ details.spot_percent_level_1 }}" name="spot_percent_level_1">
+        <label>LEVEL 2</label>
+        <input required type="text" class="form-control my-2" placeholder="LEVEL 2" aria-label="DAYS" value="{{ details.spot_percent_level_2 }}" name="spot_percent_level_2">
+        <label>LEVEL 3</label>
+        <input required type="text" class="form-control my-2" placeholder="LEVEL 3" aria-label="PERCENTAGE" value="{{ details.spot_percent_level_3 }}" name="spot_percent_level_3">
+        <button type="submit" class="btn btn-secondary">UPDATE</button>
+      </form>
+    </div>
+    <br>
+  </div>
+  <div class="col-md">
+    <div>
+      <h2 class="h2">WEEKLY</h2>
+      <form class=" g-3" style="width: 100%; max-width: 400px;" method="POST">
+        {% csrf_token %}
+        <label>DIRECT</label>
+        <input required type="text" class="form-control my-2" placeholder="SPOT" aria-label="PERCENTAGE" value="{{ details.percent_direct }}" name="percent_direct">
+        <label>LEVEL 1</label>
+        <input required type="text" class="form-control my-2" placeholder="LEVEL 1" aria-label="PERCENTAGE" value="{{ details.percent_level_1 }}" name="percent_level_1">
+        <label>LEVEL 2</label>
+        <input required type="text" class="form-control my-2" placeholder="LEVEL 2" aria-label="DAYS" value="{{ details.percent_level_2 }}" name="percent_level_2">
+        <label>LEVEL 3</label>
+        <input required type="text" class="form-control my-2" placeholder="LEVEL 3" aria-label="PERCENTAGE" value="{{ details.percent_level_3 }}" name="percent_level_3">
+        <button type="submit" class="btn btn-secondary">UPDATE</button>
+      </form>
+    </div>
+    
+  </div>
+</div>
+
+
+{% endblock %}

@@ -445,6 +445,12 @@ class Refer_view(View):
 
         return redirect("/refer")
 
+class UpdateReferDetails_view(View):
+
+    def get(self, request):
+
+        return render(request, "mod/referplan.html", {"details": models.ReferralDetails.objects.get(id=1)})
+
 class Payment_view(View):
     
     def get(self,request):

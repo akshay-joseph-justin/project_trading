@@ -34,6 +34,8 @@ ADMIN PAYMENTS
         <th scope="col">NAME</th>
         <th scope="col">AMOUNT</th>
         <th scope="col">TRANSATION ID</th>
+        <th scope="col">DATE</th>
+        <th scope="col">TIME</th>
         <th scope="col">STATUS</th>
         {% if action == 'pending' %}
         <th scope="col">ACTION</th>
@@ -49,6 +51,8 @@ ADMIN PAYMENTS
         <td>{{ payment.transaction_name }}</td>
         <td>{{ payment.transaction_amount }}</td>
         <td>{{ payment.transaction_id }}</td>
+        <td>{{ payment.date }}</td>
+        <td></td>
         <td>{{ payment.transaction_status }}</td>
         <td>
         {% if payment.transaction_status == 'pending' %}

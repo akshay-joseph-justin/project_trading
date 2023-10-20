@@ -20,6 +20,7 @@ urlpatterns = [
     path('chat/', login_required(views.Chat_view.as_view()), name='chat'),
 
     path('moderator/dashboard/', login_required(views.ModDashboard_view.as_view()), name='mod_dashboard'),
+    path('moderator/referral/details', login_required(views.UpdateReferDetails_view.as_view()), name='mod_refer'),
     path('moderator/members/', login_required(views.ModMembers_view.as_view()), name='mod_mambers'),
     path('moderator/members/<str:status>', login_required(views.ModMembers_view.as_view()), name='mod_active_member'),
     path('moderator/member/<int:id>', login_required(views.ModMember_view.as_view()), name='mod_member'),

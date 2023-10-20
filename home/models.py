@@ -31,6 +31,7 @@ class Payment(models.Model):
     transaction_id = models.CharField(max_length=100)
     transaction_amount = models.CharField(max_length=100)
     transaction_status = models.CharField(max_length=100)
+    date = models.DateTimeField(auto_now=True, null=True)
 
 class Withdraw(models.Model):
 
@@ -41,6 +42,7 @@ class Withdraw(models.Model):
     wallet_id = models.CharField(max_length=100, null=True)
     ifsc_code = models.CharField(max_length=100, null=True)
     withdraw_status = models.CharField(max_length=100)
+    date = models.DateTimeField(auto_now=True, null=True)
 
 class Addprofit(models.Model):
 
@@ -49,6 +51,7 @@ class Addprofit(models.Model):
     percentage = models.CharField(max_length=100, null=True)
     profit = models.CharField(max_length=100, null=True)
     referral_profit = models.CharField(max_length=100, null=True)
+    date = models.DateTimeField(auto_now=True, null=True)
 
 class ReferralDetails(models.Model):
     
@@ -79,4 +82,5 @@ class Chat(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     message = models.TextField(max_length=200, null=True)
     replay = models.TextField(max_length=200, null=True)
+    date = models.DateTimeField(auto_now=True, null=True)
 

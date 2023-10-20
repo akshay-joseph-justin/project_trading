@@ -30,7 +30,7 @@ ADMIN WITHDRAW
       <tr>
         <th scope="row">{{ forloop.counter }}</th>
         <td>{{ payment.transaction_amount }}</td>
-        <td>Otto</td>
+        <td>{{ payment.date }}</td>
         <td>{{ payment.transaction_status }}</td>
       </tr>
       {% endfor %}
@@ -40,7 +40,7 @@ ADMIN WITHDRAW
       <tr>
         <th scope="row">{{ forloop.counter }}</th>
         <td>{{ withdraw.withdraw_amount }}</td>
-        <td>Otto</td>
+        <td>{{ withdraw.date }}</td>
         <td>{{ withdraw.withdraw_status }}</td>
       </tr>
       {% endfor %}
@@ -49,9 +49,17 @@ ADMIN WITHDRAW
       {% for addprofit in addprofits %}
       <tr>
         <th scope="row">{{ forloop.counter }}</th>
+        {% if addprofit.profit != None %}
         <td>{{ addprofit.profit }}</td>
-        <td>Otto</td>
-        <td></td>
+        {% else %}
+        <td>{{ addprofit.referral_profit }}</td>
+        {% endif %}
+        <td>{{ addprofit.date }}</td>
+        {% if addprofit.profit != None %}
+        <td>Profit</td>
+        {% else %}
+        <td>Referral profit</td>
+        {% endif %}
       </tr>
       {% endfor %}
 
