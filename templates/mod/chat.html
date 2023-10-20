@@ -5,6 +5,16 @@ Chat page
 {% endblock %}
 
 {% block content%}
+
+<div class="messages">
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+</div>
+
 <div class="d-flex align-items-center">
 
   <ul class="list-unstyled my-0 mx-auto">
