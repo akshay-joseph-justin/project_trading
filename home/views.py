@@ -546,31 +546,26 @@ class History_view(View):
 
 class ModDashboard_view(View):
     
-    def get(self,request):
+    def get(self,request, **kwargs):
 
         if not request.user.is_superuser:
             raise Http404()
+        
+        chats = []
+
+        for member in models.User.objects.all():
+            if not member.is_superuser:
+                last = None
+                if models.Chat.objects.filter(user=member).exists():
+                    last = list(models.Chat.objects.filter(user=member))[-1]
+                lst = [member, last]
+
+                chats.append(lst)
 
         context = {
-            "chats": [chat for chat in models.Chat.objects.all() if chat.replay is None],
+            "chats": chats,
         }
-        print(context)
         return render(request, 'mod/index.html', context=context)
-    
-    def post(self, request):
-
-        if not request.user.is_superuser:
-            raise Http404
-
-        replay = request.POST["replay"]
-        id = request.POST["chat_id"]
-
-        chat = models.Chat.objects.get(id=id)
-        chat.replay = replay
-        chat.save()
-
-        messages.success(request, "repalyed to message")
-        return redirect("/moderator/dashboard/")
 
 class ModMembers_view(View):
     
@@ -1007,9 +1002,23 @@ class ModChat_view(View):
             user = request.user
         
         context = {
-            "members": [member for member in models.User.objects.all() if not member.is_superuser ],
             "chats": models.Chat.objects.filter(user=user)[::-1],
         }
 
         return render(request, "mod/chat.html", context=context)
+    
+    def post(self, request, **kwargs):
+
+        if not request.user.is_superuser:
+            raise Http404
+
+        replay = request.POST["replay"]
+        id = request.POST["chat_id"]
+
+        chat = models.Chat.objects.get(id=id)
+        chat.replay = replay
+        chat.save()
+
+        messages.success(request, "repalyed to message")
+        return redirect(f"/moderator/chat/{kwargs['id']}")
 

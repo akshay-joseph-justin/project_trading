@@ -7,27 +7,15 @@ ADMIN DASHBOARD
 {% block content%}
 <div>
 <h1> ADMIN DASHBOARD</h1>
-<!--remove this from here and move it to chat.html-->
-</div>
-
-{% for chat in chats %}
-<h2>{{ chat.user.username }}</h2>
-<h2>{{ chat.message }}</h2>
-<form method="POST">
-     {% csrf_token %}
-     <input required type="text" placeholder="Replay" name="replay">
-     <input required type="hidden" value="{{ chat.id }}" name="chat_id">
-     <input required type="submit" value="Replay">
-</form>
-{% endfor %}
-
-<!--end of chat.html-->
 
 <!--start of index.html-->
 <div class="card">
      <div class="card-body" style="background-color: #2d4059;">
        <ul class="list-unstyled mb-0">
          <!--list of all the recent messages from users-->
+         {% for member, last in chats %}
+         {% if last != None %}
+         {% if last.replay == None %}
           <li class="p-2 border-bottom">
            <a href="#!" class="d-flex justify-content-between">
              <div class="d-flex flex-row">
@@ -35,16 +23,19 @@ ADMIN DASHBOARD
                  <i style="font-size: 2.5rem; color: #ff5722;" class="fa-solid fa-user"></i>
                </div>
                <div class="pt-1">
-                 <p style="color: #fff;" class="fw-bold mb-0">Danny Smith</p>
-                 <p style="color: #fff;" class="small">Lorem ipsum dolor sit.</p>
+                 <a href="{% url 'mod_chat' id=member.id %}" style="color: #fff;" class="fw-bold mb-0">{{ member.username }}</p>
+                 <p style="color: #fff;" class="small">{{ last.message }}</p>
                </div>
              </div>
              <div class="pt-1">
-               <p class="small  mb-1" style="color: #ff5722;">5 mins ago</p>
+               <p class="small  mb-1" style="color: #ff5722;">{{ last.message_date.time }}</p>
              </div>
            </a>
          </li>
          <!--end of list-->
+         {% endif %}
+         {% endif %}
+         {% endfor %}
        </ul>
      </div>
    </div>

@@ -82,5 +82,6 @@ class Chat(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     message = models.TextField(max_length=200, null=True)
     replay = models.TextField(max_length=200, null=True)
-    date = models.DateTimeField(auto_now=True, null=True)
+    message_date = models.DateTimeField(auto_now_add=True, null=True)
+    replay_date = models.DateTimeField(auto_now=True, null=True)
 
