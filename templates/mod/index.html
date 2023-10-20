@@ -7,6 +7,7 @@ ADMIN DASHBOARD
 {% block content%}
 <div>
 <h1> ADMIN DASHBOARD</h1>
+<!--remove this from here and move it to chat.html-->
 </div>
 
 {% for chat in chats %}
@@ -20,4 +21,37 @@ ADMIN DASHBOARD
 </form>
 {% endfor %}
 
+<!--end of chat.html-->
+
+<!--start of index.html-->
+<div class="card">
+     <div class="card-body" style="background-color: #2d4059;">
+       <ul class="list-unstyled mb-0">
+         <!--list of all the recent messages from users-->
+          <li class="p-2 border-bottom">
+           <a href="#!" class="d-flex justify-content-between">
+             <div class="d-flex flex-row">
+               <div class="rounded-circle d-flex align-items-center me-3 " width="60">
+                 <i style="font-size: 2.5rem; color: #ff5722;" class="fa-solid fa-user"></i>
+               </div>
+               <div class="pt-1">
+                 <p style="color: #fff;" class="fw-bold mb-0">Danny Smith</p>
+                 <p style="color: #fff;" class="small">Lorem ipsum dolor sit.</p>
+               </div>
+             </div>
+             <div class="pt-1">
+               <p class="small  mb-1" style="color: #ff5722;">5 mins ago</p>
+             </div>
+           </a>
+         </li>
+         <!--end of list-->
+       </ul>
+     </div>
+   </div>
+   <style>
+     .card-body ul.list-unstyled li a {
+       text-decoration: none;
+     }
+   </style>
+   
 {% endblock %}
