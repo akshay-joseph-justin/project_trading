@@ -1,64 +1,61 @@
-<div class="sidenav" style="background-color: #222831; border-right: 2px solid #2d4059;">
-    {% if user.is_authenticated %}
-    <div class="sidenav-header py-3" style="background-color: #2d4059; height: 88px;">
-        <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
-        <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn p-2"> {{ user.username }} <i class="fa-solid fa-angle-down"></i></button>
-            
-            <div id="myDropdown" class="dropdown-content">
-                <ul>
-                    <li class="list-item py-2" >
-                        
-                        <a href="{% url 'profile' %}" class="text-dark"><i class="fa-solid fa-user"></i> Profile</a>
-                    </li>
-                    <li class="list-item py-2">
-                        <a href="{% url 'logout' %}" class="text-dark"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-                    </li>
-                    
-                </ul>
-            </div>
-          </div>
+<div class="sidenav" style="background-color: rgb(255,255,255); border-right: 2px solid rgb(255,255,255);">
+    <header class="  " style="background-color: rgb(255,255,255); margin-left: 0; ">
+        <div style="width: 260px;"></div>
+         <h1 class="fw-bold text-dark p-4 text-center" style="background-color: rgb(255,255,255); ">AI FX</h1>
         
-    </div>
-
-    <ul style=" background-color: #222831;" class="py-4">
+         
+       </header>
+    {% if user.is_authenticated %}
+    
+    <ul style=" background-color: rgb(255,255,255);" class="py-4">
         <li class="list-item">
-            <a class="nav-item py-3" href="{% url 'user_dashboard' %}">
-                DASHBOARD
+        <div class="sidenav-header py-2" style="background-color: rgb(255,255,255); height: 88px;">
+            <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
+            <div class="dropdown">
+                <i class="fa-solid fa-user" style="color: black; font-size: 3rem"></i><br>
+                <h4  class="fw-bold text-dark"> {{ user.username }} </h4>
+                
+                
+              
+              </div>
+            
+        </div><br>
+    </li>
+   
+
+        <li class="list-item">
+            <a class="nav-item py-3 text-black fw-bold" href="{% url 'user_dashboard' %}">
+                <i class="fa-solid fa-house" style="color: #000000; font-size: 1.5rem;"></i> DASHBOARD
             </a>
         </li>
           <li class="list-item">
-              <a class="nav-item py-3" href="{% url 'payment' %}">
-                  INVEST
+              <a class="nav-item py-3  text-black fw-bold" href="{% url 'payment' %}">
+                <i class="fa-solid fa-money-bill" style="color:black; font-size: 1.5rem;"></i> INVEST
               </a>
           </li>
           <li class="list-item">
-              <a class="nav-item py-3" href="{% url 'plans' %}">
+              <a class="nav-item py-3 text-black fw-bold" href="{% url 'plans' %}">
                   PLANS
               </a>
           </li>
           <li class="list-item">
-              <a class="nav-item py-3" href="{% url 'profit' %}">
-                  WALLET
-              </a>
-          </li>
-          <li class="list-item">
-            <a class="nav-item py-3" href="{% url 'withdraw' %}">
+            <a class="nav-item py-3 text-black fw-bold" href="{% url 'withdraw' %}">
                 WITHDRAW
             </a>
         </li>
+          
         <li class="list-item">
-            <a class="nav-item py-3" href="{% url 'refer' %}">
+            <a class="nav-item py-3 text-black fw-bold" href="{% url 'refer' %}">
                 REFER
             </a>
         </li>
         <li class="list-item">
-            <a class="nav-item py-3" href="{% url 'history' action='payments' %}">
+            <a class="nav-item py-3 text-black fw-bold" href="{% url 'history' action='payments' %}">
                 HISTORY
             </a>
         </li>
         <li class="list-item">
-            <a class="nav-item py-3" href="{% url 'chat' %}">
+            <a class="nav-item py-3 text-black fw-bold" href="{% url 'chat' %}">
                 CONTACT
             </a>
         </li>

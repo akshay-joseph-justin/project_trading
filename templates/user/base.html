@@ -58,18 +58,57 @@ background-color: #ff5722;
           display: none;
         }
       }
+      
+        .header {
+          background-color: rgb(77, 196, 200);
+          text-align: center;
+          padding: 20px;
+          font-size: 24px;
+          color: white; /* Adjust text color for better visibility */
+          border-radius: 10px;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+          transition: background-color 0.3s; /* Smooth color transition on hover */
+        }
+    
+        .header:hover {
+          background-color: rgb(100, 220, 224); /* Change the color on hover */
+        }
+      
     </style>
 </head>
 <body>
    {% include 'user/navbar.html' %}
    {% if user.is_authenticated %}
 
-   <header class=" d-flex align-items-center" style="background-color: #2d4059; margin-left: 0; height: 88px;">
+   <header class=" d-flex align-items-center" style="background-color: rgb(255,255,255); margin-left: 0; height: 88px;">
    <div style="width: 260px;"></div>
-    <h1 class="fw-bold text-light ps-3" >AI FX</h1>
+
+    <h4 class=" text-light p-4 text-black fw-bold" >Welcome Back, {{ user.get_full_name }}</h4>
+    
+    <div class="sidenav-header py-2" style="background-color: rgb(255,255,255); height: 88px;">
+      <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
+      <div class="dropdown">
+         
+          <button onclick="myFunction()" class="dropbtn p-2"><i class="fa-solid fa-gear"></i> SETTINGS <i class="fa-solid fa-angle-down"></i></button>
+          
+          <div id="myDropdown" class="dropdown-content">
+              <ul>
+                  <li class="list-item py-2" >
+                      
+                      <a href="{% url 'profile' %}" class="text-dark"><i class="fa-solid fa-user"></i> Profile</a>
+                  </li>
+                  <li class="list-item py-2">
+                      <a href="{% url 'logout' %}" class="text-dark"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                  </li>
+                  <li class="list-item py-2">
+                    <a href="{% url 'profile_update' id=9576414653 %}" class="text-dark"><i class="fa-solid fa-user-pen"></i> EDIT PROFILE</a>
+                </li>
+              </ul>
+          </div>
+        </div>
   </header>
   {% endif %}
-    <div class="main-content" style="background-color: #222831; color: #fff; min-height: 100vh;">
+    <div class="main-content" style="background-color: rgb(242,255,248); color: #fff; min-height: 100vh;">
         <button class="toggle-btn" id="sidebar-toggle-btn-2"><i class="fa-solid fa-bars"></i></button>
         {% block content %}{% endblock %}
 

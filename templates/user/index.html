@@ -16,25 +16,103 @@ Home
     </div>
 <div class="row" style="border-bottom: 2px solid #343a40;">
     {% if user_plans %}
-    <h1 class="h2"> Plans</h1>
+    <h1 class="h2 p-5"> </h1>
     <br>
     {% for user_plan in user_plans %}
     {% if user_plan.invested_amount != "0" %}
-    <div class="col-md">
-        <div class="card text-white mb-3 custom-link" style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 5px; transition: transform 0.2s; background-color: #2d4059;">
-            <div class="card-body">
-                <h4 class="card-title text-center"><strong>{{ user_plan.plan.plan_name }}</strong></h4>
-                <h4 class="card-title text-center"><strong>$ {{ user_plan.invested_amount }}</strong></h4>
-                <p class="card-text text-center" style="font-size: 1.2em;">({{ user_plan.plan.plan_min_percentage }}% - {{ user_plan.plan.plan_max_percentage }}%)</p>
-                <br>
-                <!--<p class="card-text text-center" style="font-size: 1.2em;">AMOUNT - {{ user_plan.invested_amount }}</p>-->
-                <p class="card-text text-center" style="font-size: 1.2em;">TOTAL DAYS - {{ user_plan.days }}</p>
-                <p class="card-text text-center" style="font-size: 1.2em;">Total Profit - {{ user_plan.user_profit }}</p>
-                <p class="card-text text-center" style="font-size: 1.2em;">Status - {{ user_plan.user_status }}</p>
+   
+              
                 
-            </div>
-        </div>
-    </div>
+                
+               
+               
+                <div class="d-grid gap-2">
+                    <h2 class="header">{{ user_plan.plan.plan_name }}</h2>
+                    <p class="card-text text-center" style="font-size: 1.2em;">({{ user_plan.plan.plan_min_percentage }}% - {{ user_plan.plan.plan_max_percentage }}%)</p>
+                     <p class="card-text text-center" style="font-size: 1.2em;">Status - {{ user_plan.user_status }}</p>
+                  </div>
+                <div class="container scroll-animation-text my-5">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <i class="fa-solid fa-money-bill" style="color:black; font-size: 3rem;"></i><br><br>
+                            <h5 class="lead font-italic card-title fw-bold"> INVESTED</h5>
+                            <p class="lead font-italic card-title fw-light">$ {{ user_plan.invested_amount }}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <i class="fa-solid fa-chart-line" style="color: black; font-size: 3rem;"></i><br><br>
+                            <h5 class="lead font-italic card-title fw-bold"> TOTAL EARNED PROFIT</h5>
+                            <p class="lead font-italic card-title fw-light">$ {{ user_plan.user_profit }}</p> 
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <i class="fa-solid fa-regular fa-calendar-days" style="color: black; font-size: 3rem;"></i><br><br>
+                            <h5 class="lead font-italic card-title fw-bold">DAYS</h5>
+                            <p class="lead font-italic card-title fw-light">{{ user_plan.days }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-grid gap-2 col-6 mx-auto">
+                    <a class="btn btn-primary" href="{% url 'payment' %}" type="button">CLICK HERE TO UPGRADE YOUR PLAN</a><br>
+                    
+                  </div>
+                
+                  <hr>
+                  
+
+                  <div>
+
+                   
+                   
+                    <div class="container scroll-animation-text my-5">
+                        <div class="row">
+                          <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                              <div class="card-body text-center">
+                                <i class="fa-solid fa-users" style="color:rgb(77, 196, 200); font-size: 5rem;"></i><br><br>
+                                <h5 class="lead font-italic card-title fw-bold">TEAM</h5>
+                                <p class="lead font-italic card-title fw-light">$ no of reffer</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                              <div class="card-body text-center">
+                                <i class="fa-solid fa-user-plus" style="color: rgb(77, 196, 200); font-size: 5rem;"></i><br><br>
+                                <h5 class="lead font-italic card-title fw-bold"> TOTAL REFFERED PROFIT</h5>
+                                <p class="lead font-italic card-title fw-light">$ {{ user_plan.user_referral_profit }}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card">
+                              <div class="card-body text-center">
+                                <i class="fa-solid fa-wallet" style="color: rgb(77, 196, 200); font-size: 5rem;"></i><br><br>
+                                <h5 class="lead font-italic card-title fw-bold">BALANCE</h5>
+                                <p class="lead font-italic card-title fw-light">$ {{ user_plan.total_profit }}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                               
+                      <div class="d-grid gap-2 col-6 mx-auto">
+                        <a class="btn btn-primary" href="{% url 'withdraw' %}" type="button">CLICK HERE TO WITHDRAW</a><br>
+                        
+                      </div>
+               
+
+        
         {% else %}
         <div class="col-md">
             <div class="card text-white mb-3 custom-link" style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 5px; transition: transform 0.2s; background-color: #2d4059;">
