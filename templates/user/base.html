@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="{% static '/img/logo2.png' %}" type="image/x-icon">
     <title> {% block title %}{% endblock %}</title>
     <style>
       header div{
@@ -76,20 +77,29 @@ background-color: #ff5722;
       
     </style>
 </head>
-<body>
+<body style="background-image: url({% static '/img/bgm.jpg' %})">
    {% include 'user/navbar.html' %}
    {% if user.is_authenticated %}
 
-   <header class=" d-flex align-items-center" style="background-color: rgb(255,255,255); margin-left: 0; height: 88px;">
-   <div style="width: 260px;"></div>
-
-    <h4 class=" text-light p-4 text-black fw-bold" >Welcome Back, {{ user.get_full_name }}</h4>
+   <header class=" d-flex align-items-center pb-4 pt-4 ps-2" style="  background-image: url({% static '/img/bgm.jpg' %}); margin-left: 0; height: 120px; position: fixed; top: 0; width: 100%; z-index: 1;">
+   
+    <a class="navbar-brand d-flex align-items-center ml-4 mb-2 mt-4 mx-4" href="#" style="color:  rgb(77, 196, 200)">
+      <img src="{% static '/img/logo2.png' %}" class="logo-holder" style="width: 120px; height: auto;">
+      <p class="pt-3 ps-2" style="font-size: 1.25rem; font-weight: bold; text-transform: uppercase;">
+          AI-FX<br> TRADING
+      </p>
+  </a>
     
-    <div class="sidenav-header py-2" style="background-color: rgb(255,255,255); height: 88px;">
-      <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
-      <div class="dropdown">
+    
+  
+
+    <h4 class=" text-light p-4 text fw-bold" >Welcome Back, {{ user.get_full_name }}</h4>
+    
+    <div class="sidenav-header py-2 " style="background-color: transparent; height: 100px;">
+      <button class="toggle-btn " style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
+      <div class="dropdown" style="">
          
-          <button onclick="myFunction()" class="dropbtn p-2"><i class="fa-solid fa-gear"></i> SETTINGS <i class="fa-solid fa-angle-down"></i></button>
+          <button onclick="myFunction()" style="visibility: ; margin-left:500px;" class="dropbtn p-2"><i class="fa-solid fa-gear"></i> SETTINGS <i class="fa-solid fa-angle-down"></i></button>
           
           <div id="myDropdown" class="dropdown-content">
               <ul>
@@ -106,9 +116,9 @@ background-color: #ff5722;
               </ul>
           </div>
         </div>
-  </header>
+  </header><br>
   {% endif %}
-    <div class="main-content" style="background-color: rgb(242,255,248); color: #fff; min-height: 100vh;">
+    <div class="main-content" style="background-color:blue; color: #fff; margin-top: 95px ">
         <button class="toggle-btn" id="sidebar-toggle-btn-2"><i class="fa-solid fa-bars"></i></button>
         {% block content %}{% endblock %}
 

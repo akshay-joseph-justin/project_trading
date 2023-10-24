@@ -6,7 +6,7 @@ MY PROFILE
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="card">
@@ -19,12 +19,50 @@ MY PROFILE
             <li class="list-group-item" style="background-color: #222831; color: #fff;">Full Name: {{ user.get_full_name }}</li>
             <li class="list-group-item" style="background-color: #222831; color: #fff;">Email: {{ user.email }}</li>
             <li class="list-group-item" style="background-color: #222831; color: #fff;">Mobile No.: {{ user.number }}</li>
-            <!-- Add more user information here -->
+            
           </ul>
           <a href="{% url 'profile_update' id=9576414653 %}" class="btn btn-secondary mt-3">Edit Profile</a>
         </div>
       </div>
     </div>
+  </div>
+</div> -->
+<br>
+
+<div style="display: flex; align-items: center; justify-content: center">
+  <div class="" style="display: flex; align-items: center; justify-content: center; border-radius: 50%;  background-color: rgb(77, 196, 200); width: 100px; height: 100px;"> 
+      <i class="fa-solid fa-user" style="color: black; font-size: 4rem"></i><br>
+  </div>  
+</div>
+<br>
+
+<h2 class="text-center fw-bold">MY PROFILE</h2>
+
+
+<div class="row g-3 m-5 p-2 text-center" >
+  <div class="col">
+    <h4 class="fw-bold">USERNAME</h4>
+    <h5 class="fw-lighter">{{ user.username }}</h5>
+  </div>
+  <div class="col">
+    <h4 class="fw-bold">FULL NAME</h4>
+    <h4>{{ user.get_full_name }}</h4>
+  </div>
+</div>
+<div class="row g-3 m-5 p-2 text-center" >
+  <div class="col">
+    <h4 class="fw-bold">MOBILE NUMBER</h4>
+    <h4>{{ user.number }}</h4>
+  </div>
+  <div class="col">
+    <h4 class="fw-bold">EMAIL</h4>
+    <h4>{{ user.email }}</h4>
+  </div>
+</div>
+<div class="row g-3 m-5 p-2 text-center" >
+  
+  <div class="col">
+    <a href="{% url 'profile_update' id=9576414653 %}" class="btn btn-secondary mt-3">Edit Profile</a>
   </div>
 </div>
 {% endblock %}

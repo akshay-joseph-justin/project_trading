@@ -36,6 +36,7 @@ class Dashboard_view(View):
             "user_plans": user_plans,
             "payments": payments,
             "withdraws": withdraws,
+            "plans": models.Plans.objects.all(),
         }
         
         return render(request, 'user/index.html', context=context)

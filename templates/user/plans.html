@@ -10,19 +10,17 @@ OUR PLANS
 
 <div class="row">
     {% for plan in plans %}
-    <div class="col-md">
-        <a href="{% url 'payment' %}" class="card text-white mb-3 custom-link" style="max-width: 18rem; text-decoration: none; border: 2px solid #ff5722; border-radius: 10px; transition: transform 0.2s; background-color: #2d4059;">
-    
-            <div class="card mb-3" style="border: 2px solid #ff5722;">
-                <h4 class="card-header bg-primary border-success p-3 text-center">{{ plan.plan_name }}</h4>
-                <div class="card-body text-success">
-                    <h5 class="card-title text-center p-3">$ {{ plan.plan_min_price }} - $ {{ plan.plan_max_price }}</h5>
-                </div>
-                <div class="card-footer bg-transparent border-success text-center p-3">{{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%</div>
+    <div class="col-md-4">
+        <div class="card mb-3" style="border: 2px solid #ff5722;">
+            <h4 class="card-header bg-primary border-success p-3 text-center text-white">{{ plan.plan_name }}</h4>
+            <div class="card-body text-success">
+                <h5 class="card-title text-center p-3">Invest: ${{ plan.plan_min_price }} - ${{ plan.plan_max_price }}</h5>
+                <h5 class="card-title text-center p-3">Profit: {{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%</h5>
             </div>
-    
-        </a>
+            <a href="{% url 'payment' %}" type="button" class="btn btn-success">SELECT</a>
+        </div>
     </div>
+    
     
 {% endfor %}
 </div>

@@ -5,7 +5,7 @@ WITHDRAW
 {% endblock %}
 
 {% block content%}
-<div class="messages">
+<div class="messages mt-5">
     {% for message in messages %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
@@ -16,7 +16,7 @@ WITHDRAW
 <div>
     <div class="row">
         <div class="col-md px-3 my-3">
-        <h1 class="text-white"> WITHDRAW </h1>
+        <h1 class="text-black"> WITHDRAW </h1>
         <form method="POST" style="max-width: 400px;">
             {% csrf_token %}
             
@@ -29,7 +29,7 @@ WITHDRAW
         
     </div>
     <div class="col-md px-3 djhrjh my-3">
-        <h1 class="text-white">ANOTHER METHOD</h1>
+        <h1 class="text-black">ANOTHER METHOD</h1>
 
         <form method="POST" style="max-width: 400px;">
             {% csrf_token %}

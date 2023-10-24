@@ -1,63 +1,77 @@
-<div class="sidenav" style="background-color: rgb(255,255,255); border-right: 2px solid rgb(255,255,255);">
-    <header class="  " style="background-color: rgb(255,255,255); margin-left: 0; ">
-        <div style="width: 260px;"></div>
-         <h1 class="fw-bold text-dark p-4 text-center" style="background-color: rgb(255,255,255); ">AI FX</h1>
+{% load static %}
+<div class="sidenav" style="background-image: url({% static '/img/bgm.jpg' %}); border-right: 2px solid rgb(255,255,255);">
+    <header class="  " style="background-color:blue; margin-left: 0; ">
+        <div style="width: 260px;">
+            <h1 class="fw-bold text-dark p-3 text-center" style="background-color: rgb(255,255,255); visibility: hidden">AI FX</h1>
+        </div>
+         
         
          
        </header>
     {% if user.is_authenticated %}
     
-    <ul style=" background-color: rgb(255,255,255);" class="py-4">
+    <ul style=" margin-top: 40px; background-image: url({% static '/img/bgm.jpg' %});" class="py-2 ">
         <li class="list-item">
-        <div class="sidenav-header py-2" style="background-color: rgb(255,255,255); height: 88px;">
-            <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
-            <div class="dropdown">
-                <i class="fa-solid fa-user" style="color: black; font-size: 3rem"></i><br>
-                <h4  class="fw-bold text-dark"> {{ user.username }} </h4>
+        <div class="sidenav-header " style="background-image: url({% static '/img/bgm.jpg' %}); height: 88px;">
+            <div style="display: flex; align-items: center; justify-content: center">
+            <div class="" style="display: flex; align-items: center; justify-content: center; border-radius: 50%;  background-color: rgb(77, 196, 200); width: 100px; height: 100px;"> 
+                <i class="fa-solid fa-user" style="color: black; font-size: 4rem"></i><br>
+            </div>
+        </div>
+                <h4  class="fw-bold mt-2 text-light"> {{ user.username }} </h4>
                 
                 
               
-              </div>
+             
             
         </div><br>
     </li>
    
 
-        <li class="list-item">
-            <a class="nav-item py-3 text-black fw-bold" href="{% url 'user_dashboard' %}">
-                <i class="fa-solid fa-house" style="color: #000000; font-size: 1.5rem;"></i> DASHBOARD
+        <li class="list-item text-start ms-5 mt-5">
+            <a class="nav-item py-3 text-primary fw-bold" style="" href="{% url 'user_dashboard' %}">
+                <i class="fa-solid fa-house text-primary" style=" font-size: 1.5rem;"></i> DASHBOARD
             </a>
         </li>
-          <li class="list-item">
-              <a class="nav-item py-3  text-black fw-bold" href="{% url 'payment' %}">
-                <i class="fa-solid fa-money-bill" style="color:black; font-size: 1.5rem;"></i> INVEST
+        <li class="list-item text-start ms-5 ">
+                      
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'profile' %}" >
+            <i class="fa-solid fa-user" style=" font-size: 1.5rem;"></i> PROFILE</a>
+        </li>
+          <li class="list-item text-start ms-5">
+              <a class="nav-item py-3  text-primary fw-bold" href="{% url 'payment' %}">
+                <i class="fa-solid fa-money-bill-transfer text-primary" style="color:black; font-size: 1.5rem;"></i> INVEST
               </a>
           </li>
-          <li class="list-item">
-              <a class="nav-item py-3 text-black fw-bold" href="{% url 'plans' %}">
-                  PLANS
+          <li class="list-item text-start ms-5 ">
+              <a class="nav-item py-3 text-primary fw-bold" href="{% url 'plans' %}">
+                <i class="fa-solid fa-house text-primary" style=" font-size: 1.5rem;"></i>  PLANS
               </a>
           </li>
-          <li class="list-item">
-            <a class="nav-item py-3 text-black fw-bold" href="{% url 'withdraw' %}">
-                WITHDRAW
+          <li class="list-item text-start ms-5 ">
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'withdraw' %}">
+                <i class="fa-solid fa-money-bill text-primary" style="color:black; font-size: 1.5rem;"></i> WITHDRAW
             </a>
         </li>
           
-        <li class="list-item">
-            <a class="nav-item py-3 text-black fw-bold" href="{% url 'refer' %}">
-                REFER
+        <li class="list-item text-start ms-5 ">
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'refer' %}">
+                <i class="fa-solid fa-user-plus text-primary" style=" font-size: 1.5rem;"></i>  REFER
             </a>
         </li>
-        <li class="list-item">
-            <a class="nav-item py-3 text-black fw-bold" href="{% url 'history' action='payments' %}">
-                HISTORY
+        <li class="list-item text-start ms-5 ">
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'history' action='payments' %}">
+                <i class="fa-solid fa-money-bill-transfer text-primary" style="color:black; font-size: 1.5rem;"></i> HISTORY
             </a>
         </li>
-        <li class="list-item">
-            <a class="nav-item py-3 text-black fw-bold" href="{% url 'chat' %}">
-                CONTACT
+        <li class="list-item text-start ms-5 ">
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'chat' %}">
+                <i class="fa-solid fa-phone text-primary" style=" font-size: 1.5rem;"></i> CONTACT
             </a>
+        </li>
+        <li class="list-item text-start ms-5 ">
+            <a href="{% url 'logout' %}" class="nav-item py-3 text-primary fw-bold">
+                <i class="fa-solid fa-right-from-bracket" style=" font-size: 1.5rem;"></i> LOGOUT</a>
         </li>
           <!-- Add more menu items here -->
       </ul>
