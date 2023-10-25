@@ -5,148 +5,168 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="{% static '/css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="{% static '/img/logo2.png' %}" type="image/x-icon">
-    <title> {% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <style>
-      header div{
+      header div {
         display: block;
       }
-.sidenav{
-  z-index: 1;
-}
-      .sidenav .dropdown .dropbtn{
-
+      .sidenav {
+        z-index: 1;
+      }
+      .sidenav .dropdown .dropbtn {
         background-color: #ff5722;
       }
-      .dropdown{
+      .dropdown {
         width: 100%;
         height: 100%;
       }
-      .dropdown .dropbtn { 
+      .dropdown .dropbtn {
         min-width: fit-content;
         height: 70%;
         border-radius: 10px;
-
       }
-      .dropdown-content{
+      .dropdown-content {
         width: 100%;
         background-color: #eeeeee;
       }
-      .dropdown-content a:hover{
-        background-color: #ff5722;
+      .dropdown-content a:hover {
+        background-color: rgb(100, 220, 224);
       }
-      .sidenav a{
+      .sidenav a {
         padding: 0.25em 0;
       }
       .sidenav a:hover {
-background-color: #ff5722;
-}
-      .djhrjh{
+        background-color: rgb(100, 220, 224);
+      }
+      .djhrjh {
         border-left: 2px solid #2d4059;
       }
       
       @media screen and (max-width: 768px) {
-        .djhrjh{
+        .djhrjh {
           border-left: none;
           border-top: 2px solid #2d4059;
         }
-        
-        header div{
+        header div {
           display: none;
         }
       }
       
-        .header {
-          background-color: rgb(77, 196, 200);
-          text-align: center;
-          padding: 20px;
-          font-size: 24px;
-          color: white; /* Adjust text color for better visibility */
-          border-radius: 10px;
-          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-          transition: background-color 0.3s; /* Smooth color transition on hover */
-        }
+      .header {
+        background-color: rgb(77, 196, 200);
+        text-align: center;
+        padding: 20px;
+        font-size: 24px;
+        color: white; /* Adjust text color for better visibility */
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+        transition: background-color 0.3s; /* Smooth color transition on hover */
+      }
     
-        .header:hover {
-          background-color: rgb(100, 220, 224); /* Change the color on hover */
+      .header:hover {
+        background-color: rgb(100, 220, 224); /* Change the color on hover */
+      }
+      @media screen and (max-width: 900px) {
+        .greetingmsg {
+          display: none;
         }
-      
+      }
     </style>
 </head>
 <body style="background-image: url({% static '/img/bgm.jpg' %})">
    {% include 'user/navbar.html' %}
    {% if user.is_authenticated %}
-
-   <header class=" d-flex align-items-center pb-4 pt-4 ps-2" style="  background-image: url({% static '/img/bgm.jpg' %}); margin-left: 0; height: 120px; position: fixed; top: 0; width: 100%; z-index: 1;">
-   
-    <a class="navbar-brand d-flex align-items-center ml-4 mb-2 mt-4 mx-4" href="#" style="color:  rgb(77, 196, 200)">
+   <header class="d-flex align-items-center pb-4 pt-4 ps-2" style="background-image: url({% static '/img/bgm.jpg' %}); margin-left: 0; height: 120px; position: fixed; top: 0; width: 100%; z-index: 10;">
+    <a class="navbar-brand d-flex align-items-center ml-4 mb-2 mt-4 mx-4" href="#" style="color: rgb(77, 196, 200)">
       <img src="{% static '/img/logo2.png' %}" class="logo-holder" style="width: 120px; height: auto;">
-      <p class="pt-3 ps-2" style="font-size: 1.25rem; font-weight: bold; text-transform: uppercase;">
-          AI-FX<br> TRADING
-      </p>
-  </a>
-    
-    
-  
+      <p class="pt-3 ps-2" style="font-size: 1.25rem; font-weight: bold; text-transform: uppercase;">AI-FX<br> TRADING</p>
+    </a>
+    <h4 class="greetingmsg text-light p-4 text fw-bold">Welcome Back, {{ user.get_full_name }}</h4>
+    <button class="toggle-btn" id="sidebar-toggle-btn-2"><i class="fa-solid fa-bars"></i></button>
 
-    <h4 class=" text-light p-4 text fw-bold" >Welcome Back, {{ user.get_full_name }}</h4>
-    
-    <div class="sidenav-header py-2 " style="background-color: transparent; height: 100px;">
-      <button class="toggle-btn " style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
+    <!-- <div class="sidenav-header py-2" style="background-color: transparent; height: 100px;">
+      <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
       <div class="dropdown" style="">
-         
-          <button onclick="myFunction()" style="visibility: ; margin-left:500px;" class="dropbtn p-2"><i class="fa-solid fa-gear"></i> SETTINGS <i class="fa-solid fa-angle-down"></i></button>
-          
-          <div id="myDropdown" class="dropdown-content">
-              <ul>
-                  <li class="list-item py-2" >
-                      
-                      <a href="{% url 'profile' %}" class="text-dark"><i class="fa-solid fa-user"></i> Profile</a>
-                  </li>
-                  <li class="list-item py-2">
-                      <a href="{% url 'logout' %}" class="text-dark"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-                  </li>
-                  <li class="list-item py-2">
-                    <a href="{% url 'profile_update' id=9576414653 %}" class="text-dark"><i class="fa-solid fa-user-pen"></i> EDIT PROFILE</a>
-                </li>
-              </ul>
-          </div>
+        <button onclick="myFunction()" style="margin-left: 500px;" class="dropbtn p-2"><i class="fa-solid fa-gear"></i> SETTINGS <i class="fa-solid fa-angle-down"></i></button>
+        <div id="myDropdown" class="dropdown-content">
+          <ul>
+            <li class="list-item py-2">
+              <a href="{% url 'profile' %}" class="text-dark"><i class="fa-solid fa-user"></i> Profile</a>
+            </li>
+            <li class="list-item py-2">
+              <a href="{% url 'logout' %}" class="text-dark"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </li>
+            <li class="list-item py-2">
+              <a href="{% url 'profile_update' id=9576414653 %}" class="text-dark"><i class="fa-solid fa-user-pen"></i> EDIT PROFILE</a>
+            </li>
+          </ul>
         </div>
+      </div>
+    </div> -->
   </header><br>
   {% endif %}
-    <div class="main-content" style="background-color:blue; color: #fff; margin-top: 95px ">
-        <button class="toggle-btn" id="sidebar-toggle-btn-2"><i class="fa-solid fa-bars"></i></button>
-        {% block content %}{% endblock %}
+  <div class="main-content" style="background-color: blue; color: #fff; margin-top: 95px;">
 
-    </div>
-    <script>
-        /* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-  }
-  
-  // Close the dropdown menu if the user clicks outside of it
-  window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
+    {% block content %}{% endblock %}
+  </div>
+  <script>
+    document.querySelector('#sidebar-toggle-btn-1').addEventListener('click', function(event) {
+      event.stopPropagation(); // Prevent event propagation
+      toggleSidebar();
+    });
+
+    document.querySelector('#sidebar-toggle-btn-2').addEventListener('click', function(event) {
+      event.stopPropagation(); // Prevent event propagation
+      toggleSidebar();
+    });
+
+    // Function to toggle the sidebar
+    function toggleSidebar() {
+      var sidenav = document.querySelector('.sidenav');
+      sidenav.classList.toggle('open');
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
         }
       }
     }
-  }
-    </script>
 
-    <script src="{% static 'js/script.js' %}"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-  </html>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+  
+    // Close the dropdown menu if the user clicks outside of it
+    // window.onclick = function(event) {
+    //   if (!event.target.matches('.dropbtn')) {
+    //     var dropdowns = document.getElementsByClassName("dropdown-content");
+    //     var i;
+    //     for (i = 0; i < dropdowns.length; i++) {
+    //       var openDropdown = dropdowns[i];
+    //       if openDropdown.classList.contains('show') {
+    //         openDropdown.classList.remove('show');
+    //       }
+    //     }
+    //   }
+    // }
+  </script>
+
+  <script src="{% static 'js/script.js' %}"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</html>

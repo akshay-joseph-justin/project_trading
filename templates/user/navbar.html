@@ -1,5 +1,6 @@
 {% load static %}
-<div class="sidenav" style="background-image: url({% static '/img/bgm.jpg' %}); border-right: 2px solid rgb(255,255,255);">
+
+<div class="sidenav" style="background-image: url({% static '/img/bgm.jpg' %}); background-repeat:no-repeat; background-size: cover;  border-right: 2px solid rgb(255,255,255);">
     <header class="  " style="background-color:blue; margin-left: 0; ">
         <div style="width: 260px;">
             <h1 class="fw-bold text-dark p-3 text-center" style="background-color: rgb(255,255,255); visibility: hidden">AI FX</h1>
@@ -10,9 +11,11 @@
        </header>
     {% if user.is_authenticated %}
     
-    <ul style=" margin-top: 40px; background-image: url({% static '/img/bgm.jpg' %});" class="py-2 ">
+    <ul style=" margin-top: 40px;" class=" ">
         <li class="list-item">
         <div class="sidenav-header " style="background-image: url({% static '/img/bgm.jpg' %}); height: 88px;">
+            <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
+
             <div style="display: flex; align-items: center; justify-content: center">
             <div class="" style="display: flex; align-items: center; justify-content: center; border-radius: 50%;  background-color: rgb(77, 196, 200); width: 100px; height: 100px;"> 
                 <i class="fa-solid fa-user" style="color: black; font-size: 4rem"></i><br>
@@ -28,51 +31,78 @@
     </li>
    
 
-        <li class="list-item text-start ms-5 mt-5">
-            <a class="nav-item py-3 text-primary fw-bold" style="" href="{% url 'user_dashboard' %}">
-                <i class="fa-solid fa-house text-primary" style=" font-size: 1.5rem;"></i> DASHBOARD
-            </a>
+        <li class="list-item text-center mt-5">
+            <div>
+
+                <a class="nav-item py-3 text-primary fw-bold" style="" href="{% url 'user_dashboard' %}">
+                    <i class="fa-solid fa-house text-primary" style=" font-size: 1.5rem;"></i> DASHBOARD
+                </a>
+            </div>
         </li>
-        <li class="list-item text-start ms-5 ">
-                      
-            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'profile' %}" >
-            <i class="fa-solid fa-user" style=" font-size: 1.5rem;"></i> PROFILE</a>
+        <li class="list-item text-center ">
+            <div>
+
+                
+                <a class="nav-item py-3 text-primary fw-bold" href="{% url 'profile' %}" >
+                    <i class="fa-solid fa-user" style=" font-size: 1.5rem;"></i> PROFILE</a>
+                </div>
         </li>
-          <li class="list-item text-start ms-5">
-              <a class="nav-item py-3  text-primary fw-bold" href="{% url 'payment' %}">
-                <i class="fa-solid fa-money-bill-transfer text-primary" style="color:black; font-size: 1.5rem;"></i> INVEST
-              </a>
+          <li class="list-item text-center">
+            <div>
+
+                <a class="nav-item py-3  text-primary fw-bold" href="{% url 'payment' %}">
+                    <i class="fa-solid fa-money-bill-transfer text-primary" style="color:black; font-size: 1.5rem;"></i> INVEST
+                </a>
+            </div>
           </li>
-          <li class="list-item text-start ms-5 ">
-              <a class="nav-item py-3 text-primary fw-bold" href="{% url 'plans' %}">
-                <i class="fa-solid fa-house text-primary" style=" font-size: 1.5rem;"></i>  PLANS
-              </a>
+          <li class="list-item text-center ">
+            <div>
+
+                <a class="nav-item py-3 text-primary fw-bold" href="{% url 'plans' %}">
+                    <i class="fa-solid fa-house text-primary" style=" font-size: 1.5rem;"></i>  PLANS
+                </a>
+            </div>
           </li>
-          <li class="list-item text-start ms-5 ">
-            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'withdraw' %}">
-                <i class="fa-solid fa-money-bill text-primary" style="color:black; font-size: 1.5rem;"></i> WITHDRAW
-            </a>
+          <li class="list-item text-center ">
+            <div>
+
+                <a class="nav-item py-3 text-primary fw-bold" href="{% url 'withdraw' %}">
+                    <i class="fa-solid fa-money-bill text-primary" style="color:black; font-size: 1.5rem;"></i> WITHDRAW
+                </a>
+            </div>
         </li>
           
-        <li class="list-item text-start ms-5 ">
-            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'refer' %}">
-                <i class="fa-solid fa-user-plus text-primary" style=" font-size: 1.5rem;"></i>  REFER
-            </a>
+        <li class="list-item text-center ">
+            <div>
+
+                <a class="nav-item py-3 text-primary fw-bold" href="{% url 'refer' %}">
+                    <i class="fa-solid fa-user-plus text-primary" style=" font-size: 1.5rem;"></i>  REFER
+                </a>
+            </div>
         </li>
-        <li class="list-item text-start ms-5 ">
-            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'history' action='payments' %}">
-                <i class="fa-solid fa-money-bill-transfer text-primary" style="color:black; font-size: 1.5rem;"></i> HISTORY
-            </a>
+        <li class="list-item text-center ">
+            <div>
+
+                <a class="nav-item py-3 text-primary fw-bold" href="{% url 'history' action='payments' %}">
+                    <i class="fa-solid fa-money-bill-transfer text-primary" style="color:black; font-size: 1.5rem;"></i> HISTORY
+                </a>
+            </div>
         </li>
-        <li class="list-item text-start ms-5 ">
-            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'chat' %}">
-                <i class="fa-solid fa-phone text-primary" style=" font-size: 1.5rem;"></i> CONTACT
-            </a>
+        <li class="list-item text-center ">
+            <div>
+
+                <a class="nav-item py-3 text-primary fw-bold" href="{% url 'chat' %}">
+                    <i class="fa-solid fa-phone text-primary" style=" font-size: 1.5rem;"></i> CONTACT
+                </a>
+            </div>
         </li>
-        <li class="list-item text-start ms-5 ">
-            <a href="{% url 'logout' %}" class="nav-item py-3 text-primary fw-bold">
-                <i class="fa-solid fa-right-from-bracket" style=" font-size: 1.5rem;"></i> LOGOUT</a>
-        </li>
+        <li class="list-item text-center ">
+            <div>
+
+                <a href="{% url 'logout' %}" class="nav-item py-3 text-primary fw-bold">
+                    <i class="fa-solid fa-right-from-bracket" style=" font-size: 1.5rem;"></i> LOGOUT</a>
+                </li>
+            </div>
           <!-- Add more menu items here -->
       </ul>
         {% else %}
