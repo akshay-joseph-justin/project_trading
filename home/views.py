@@ -95,7 +95,7 @@ class Signup_view(View):
 
         if passw1 != passw2:
 
-            messages.error(request, "password didnt match")
+            messages.error(request, "password did not match")
             return render(request, "signup.html", context=temp_context)
 
         user = User(first_name=fname, last_name=lname,username=uname, email=email)
@@ -104,15 +104,11 @@ class Signup_view(View):
         authenticate(username=uname, password=passw1)
         login(request, user)
 
-        print("user created")
-
         self.add_user_plan(request.user, contact)
-        print("user_plan added")
         self.add_referral(request.user)
-        print("referral added")
         print(f"refer [{referral_id}]")
         if len(referral_id) > 5:
-            if models.Referral.objects.filter(referral_id=id).exists():
+            if models.Referral.objects.filter(referral_id=referral_id).exists():
                 self.add_referred(request.user, referral_id)
                 print("referral tree")
             else:
@@ -488,12 +484,14 @@ class Profile_view(View):
     
     def get(self,request, **kwargs):
 
-        context = {}
+        context = {
+            "user_plan": models.User_plan.objects.get(user=request.user),
+        }
 
         if "id" in kwargs:
-            return render(request, "user/updateprofile.html")
+            return render(request, "user/updateprofile.html", context=context)
 
-        return render(request, 'user/profile.html')
+        return render(request, 'user/profile.html', context=context)
     
     def post(self, request, **kwargs):
 
