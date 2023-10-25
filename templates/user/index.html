@@ -49,12 +49,14 @@
             <br>
             {% for user_plan in user_plans %}
                 {% if user_plan.invested_amount != "0" %}
-                    <div class="d-grid gap-2">
-                        <div class="header">
-                            <h2>{{ user_plan.plan.plan_name }}</h2>
-                        </div>
-                    </div>
-                    <div class="container my-5">
+                <div class="container-fluid bg-primary py-3">
+                  <div class="row">
+                      <div class="col-md-12 text-center">
+                          <h1 class="text-white">{{ user_plan.plan.plan_name }}</h1>
+                      </div>
+                  </div>
+              </div>
+              <div class="container my-5">
                         <div class="row">
                             <div class="col-md-6 col-lg-4 mb-4">
                                 <div class="card">
@@ -132,19 +134,22 @@
                     <br>
                     <hr>
                     <div class="row">
-                        {% for plan in plans %}
-                            <div class="col-md-4">
-                                <div class="card mb-3" style="border: 2px solid #ff5722;">
-                                    <h4 class="card-header bg-primary border-success p-3 text-center text-white">
-                                        {{ plan.plan_name }}</h4>
-                                    <div class="card-body text-success">
-                                        <h5 class="card-title text-center p-3">Invest: ${{ plan.plan_min_price }} - ${{ plan.plan_max_price }}</h5>
-                                        <h5 class="card-title text-center p-3">Profit: {{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%</h5>
-                                    </div>
-                                    <a href="{% url 'payment' %}" type="button" class="btn btn-success">Upgrade</a>
-                                </div>
-                            </div>
-                        {% endfor %}
+                      {% for plan in plans %}
+                      <div class="col-md-4">
+                          <div class="card mb-3">
+                              <div class="card-header bg-primary text-white text-center">
+                                  <h4 class="fw-bold">{{ plan.plan_name }}</h4>
+                              </div>
+                              <div class="card-body" style="background-image: url(https://images.unsplash.com/photo-1640340434855-6084b1f4901c?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYWRpbmd8ZW58MHx8MHx8fDA%3D);">
+                                  <h5 class="card-title text-center text-light mb-4">Invest: ${{ plan.plan_min_price }} - ${{ plan.plan_max_price }}</h5>
+                                  <h5 class="card-title text-center text-light mb-4">Profit: {{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%</h5>
+                                  <div class="text-center">
+                                      <a href="{% url 'payment' %}" class="btn btn-success">Upgrade Plan</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  {% endfor %}
                     </div>
                 {% else %}
                     <div class="d-grid gap-2">
@@ -229,32 +234,33 @@
                     </div>
                     <br>
                     <hr>
-                    <div class="row ">
-                        {% for plan in plans %}
-                            <div class="col-md-4">
-                                <div class="card mb-3" style="border: 2px solid #ff5722;">
-                                    <h4 class="card-header bg-primary border-success p-3 text-center text-white">
-                                        {{ plan.plan_name }}</h4>
-                                    <div class="card-body text-success">
-                                        <h5 class="card-title text-center p-3">Invest: ${{ plan.plan_min_price }} - ${{ plan.plan_max_price }}</h5>
-                                        <h5 class="card-title text-center p-3">Profit: {{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%</h5>
-                                    </div>
-                                    <a href="{% url 'payment' %}" type="button" class="btn btn-success">SELECT</a>
-                                </div>
-                            </div>
-                        {% endfor %}
+                    <div class="row">
+                      {% for plan in plans %}
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4 class="fw-bold">{{ plan.plan_name }}</h4>
                     </div>
+                    <div class="card-body" style="background-image: url(https://images.unsplash.com/photo-1640340434855-6084b1f4901c?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYWRpbmd8ZW58MHx8MHx8fDA%3D);">
+                        <h5 class="card-title text-center text-light mb-4">Invest: ${{ plan.plan_min_price }} - ${{ plan.plan_max_price }}</h5>
+                        <h5 class="card-title text-center text-light mb-4">Profit: {{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%</h5>
+                        <div class="text-center">
+                            <a href="{% url 'payment' %}" class="btn btn-success">Select Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+                  </div>
+                  <div class="d-grid gap-2 col-6 mx-auto">
+                      <a class="btn btn-primary" href="{% url 'withdraw' %}" type="button">CLICK HERE TO WITHDRAW</a>
+                  </div>
+                  <hr>
                 {% endif %}
             {% endfor %}
         {% endif %}
         <br>
     </div>
     <br>
-    <div class="row" style="border-bottom: 2px solid #343a40;">
-        <!-- Your commented out code here -->
-    </div>
-    <br>
-    <div class="row" style="border-bottom: 2px solid #343a40;">
-        <!-- Your commented out code here -->
-    </div>
+    
 {% endblock %}
