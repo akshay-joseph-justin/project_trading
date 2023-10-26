@@ -1,0 +1,111 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title%}
+Menu
+{% endblock %}
+
+{% block content%}
+<style>
+    a{
+        text-decoration: none;
+    }
+    li{
+        margin: 20px 0;
+    }
+</style>
+<ul style=" margin-top: 40px; min-height: 100vh; list-style: none;" class=" ">
+    <li class="list-item">
+    <div class="sidenav-header " style="background-color: transparent; height: 88px;">
+        <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
+
+        <div style="display: flex; align-items: center; justify-content: center">
+        <div class="" style="display: flex; align-items: center; justify-content: center; border-radius: 50%;  background-color: rgb(77, 196, 200); width: 100px; height: 100px;"> 
+            <i class="fa-solid fa-user" style="color: black; font-size: 4rem"></i><br>
+        </div>
+    </div>
+            <h4  class="fw-bold mt-2 text-light"> {{ user.username }} </h4>
+            
+            
+          
+         
+        
+    </div><br>
+</li>
+
+
+    <li class="list-item text-center mt-5">
+        <div>
+
+            <a class="nav-item py-3 text-primary fw-bold" style="" href="{% url 'user_dashboard' %}">
+                <i class="fa-solid fa-house text-primary" style=" font-size: 1.5rem;"></i> DASHBOARD
+            </a>
+        </div>
+    </li>
+    <li class="list-item text-center ">
+        <div>
+
+            
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'profile' %}" >
+                <i class="fa-solid fa-user" style=" font-size: 1.5rem;"></i> PROFILE</a>
+            </div>
+    </li>
+      <li class="list-item text-center">
+        <div>
+
+            <a class="nav-item py-3  text-primary fw-bold" href="{% url 'payment' %}">
+                <i class="fa-solid fa-money-bill-transfer text-primary" style="color:black; font-size: 1.5rem;"></i> INVEST
+            </a>
+        </div>
+      </li>
+      <li class="list-item text-center ">
+        <div>
+
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'plans' %}">
+                <i class="fa-solid fa-house text-primary" style=" font-size: 1.5rem;"></i>  PLANS
+            </a>
+        </div>
+      </li>
+      <li class="list-item text-center ">
+        <div>
+
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'withdraw' %}">
+                <i class="fa-solid fa-money-bill text-primary" style="color:black; font-size: 1.5rem;"></i> WITHDRAW
+            </a>
+        </div>
+    </li>
+      
+    <li class="list-item text-center ">
+        <div>
+
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'refer' %}">
+                <i class="fa-solid fa-user-plus text-primary" style=" font-size: 1.5rem;"></i>  REFER
+            </a>
+        </div>
+    </li>
+    <li class="list-item text-center ">
+        <div>
+
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'history' action='payments' %}">
+                <i class="fa-solid fa-money-bill-transfer text-primary" style="color:black; font-size: 1.5rem;"></i> HISTORY
+            </a>
+        </div>
+    </li>
+    <li class="list-item text-center ">
+        <div>
+
+            <a class="nav-item py-3 text-primary fw-bold" href="{% url 'chat' %}">
+                <i class="fa-solid fa-phone text-primary" style=" font-size: 1.5rem;"></i> CONTACT
+            </a>
+        </div>
+    </li>
+    <li class="list-item text-center ">
+        <div>
+
+            <a href="{% url 'logout' %}" class="nav-item py-3 text-primary fw-bold">
+                <i class="fa-solid fa-right-from-bracket" style=" font-size: 1.5rem;"></i> LOGOUT</a>
+            </li>
+        </div>
+      <!-- Add more menu items here -->
+  </ul>
+    
+{% endblock %}

@@ -13,7 +13,11 @@ from django.http import Http404
 from random import randint
 
 from . import models
-
+#added by sreekanth
+class NavMenu(View):
+    def get(self, request):
+        
+        return render(request, 'mininavbar.html',)
 
 class Index_view(View):
 
