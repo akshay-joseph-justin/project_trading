@@ -35,12 +35,15 @@ class Dashboard_view(View):
         user_plans = models.User_plan.objects.filter(user=request.user)
         payments = [payment for payment in models.Payment.objects.filter(user=request.user) if payment.transaction_status != "approved"]
         withdraws = [withdraw for withdraw in models.Withdraw.objects.filter(user=request.user) if withdraw.withdraw_status != "done"]
+        refer = models.Referral.objects.get(user=request.user)
+        team_no = len(refer.direct)
 
         context = {
             "user_plans": user_plans,
             "payments": payments,
             "withdraws": withdraws,
             "plans": models.Plans.objects.all(),
+            "team_no": team_no,
         }
         
         return render(request, 'user/index.html', context=context)
