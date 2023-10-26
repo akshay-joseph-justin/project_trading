@@ -41,4 +41,8 @@ urlpatterns = [
     path('logout/', login_required(views.Logout_view.as_view()), name='logout'),
     path('password/forgot/', views.ForgotPassword_view.as_view(), name='passw_forgot'),
     path('password/change/', login_required(views.ChangePassword_view.as_view()), name='passw_change'),
+
+    #added by sreekanth
+    path('navmenu/', views.NavMenu.as_view(), name='navmenu'),
+
 ]

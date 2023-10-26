@@ -75,6 +75,11 @@
           display: none;
         }
       }
+      @media screen and (min-width: 900px) {
+        .jargffkwgf{
+          display: none;
+        }
+      }
     </style>
     
 </head>
@@ -87,7 +92,8 @@
       <p class="pt-3 ps-2" style="font-size: 1.25rem; font-weight: bold; text-transform: uppercase;">AI-FX<br> TRADING</p>
     </a>
     <h4 class="greetingmsg text-light p-4 text fw-bold">Welcome Back, {{ user.get_full_name }}</h4>
-    <button class="toggle-btn" id="sidebar-toggle-btn-2"><i class="fa-solid fa-bars"></i></button>
+    <!-- <button class="toggle-btn" id="sidebar-toggle-btn-2"><i class="fa-solid fa-bars"></i></button> -->
+    <a href="{% url 'navmenu' %}" class="btn jargffkwgf"><i class="fa-solid fa-bars" style="font-size: 2rem; color: #eeeeee;"></i></a>
 
     <!-- <div class="sidenav-header py-2" style="background-color: transparent; height: 100px;">
       <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
