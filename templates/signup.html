@@ -1,52 +1,65 @@
-{% extends 'user/base.html' %}
-
-{% block title%}
+{% extends 'home.html' %}
+{% load static %}
+{% block title %}
 Sign Up
 {% endblock %}
 
-{% block content%}
-
-
-<div class="messages ">
+{% block content %}
+<div class="messages">
   {% for message in messages %}
   <div class="alert alert-success alert-dismissible fade show" role="alert">
       <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   {% endfor %}
-  </div>
-<div class=" mx-auto my-4 " style=" width: 100%; max-width: 500px;">
-    <h1 class="h1">Sign Up</h1>
-        <form method="POST">
-            {% csrf_token %}
-            <input type="text" class="form-control my-3" placeholder="First name" aria-label="First name" value="{{ fname | default:'' }}" name="fname" required>
-            <input type="text" class="form-control my-3" placeholder="Last name" aria-label="Last name" value="{{ lname | default:'' }}" name="lname" required>
-            <input type="email" class="form-control my-3" placeholder="Email" aria-label="Email" value="{{ email | default:'' }}" name="signup_email" required>
-            <input type="tel" class="form-control my-3" placeholder="Contact Number" aria-label="Email" value="{{ contact | default:'' }}" name="contact" required>
-            <input type="username" class="form-control my-3" placeholder="username" aria-label="username" value="{{ uname | default:'' }}" name="signup_uname" required>
-            <input type="password" class="form-control my-3" placeholder="password" aria-label="password" name="signup_passw1" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="Your password can’t be too similar to your other personal information. Your password must contain at least 8 characters. Your password can’t be a commonly used password. Your password can’t be entirely numeric." required>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <p>    Your password can’t be too similar to your other personal information.
-                    Your password must contain at least 8 characters.
-                    Your password can’t be a commonly used password.
-                    Your password can’t be entirely numeric.</p>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-    <input type="password" class="form-control my-3" placeholder="confirm password" aria-label="confirm password" name="signup_passw2" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="Enter the same password you typed above." required>
-    
-            <input type="text" class="form-control my-3" placeholder="Referral ID" aria-label="username" value="{{ referral | default:'' }}" name="referral_id">
-            <button type="submit" class="btn btn-secondary">Sign Up</button>
-            
-        </form>
-       
-    <br>
-        <div>
-            Already have an account? <a href="{% url 'login' %}" style="color: #ff5722;">Log In</a>
-    
-          </div>
-
 </div>
 
+<div class="d-flex align-items-center justify-content-center flex-column" style="min-height: 100vh; background-color: transparent;">
+    <div class="p-5 m-2 text-center" style="width: 100%; max-width: 500px; background-color: #33a1fd; border-radius: 10px;">
+  <div style="display: flex; align-items: center; justify-content: center;">
+    <img src="{% static 'img/logo2.png' %}" class="logo-holder" style="width: 100px; height: auto;">
+    <h1 class="h2" style="font-weight: bold; text-transform: uppercase;">AI-FX TRADING</h1>
+  </div>
+
+    <h1 class="h1">Sign Up</h1>
+    <form method="POST" class="text-center">
+      {% csrf_token %}
+      <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
+        <input type="text" class="form-control" name="fname" placeholder="First Name" required>
+      </div>
+      <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
+        <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
+      </div>
+      <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
+        <input type="email" class="form-control" name="signup_email" placeholder="Email" required>
+      </div>
+      <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
+        <input type="tel" class="form-control" name="contact" placeholder="Contact Number" required>
+      </div>
+      <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
+        <input type="text" class="form-control" name="signup_uname" placeholder="Username" required>
+      </div>
+      <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
+        <input type="password" class="form-control" name="signup_passw1" placeholder="Password" required>
+      </div>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: #ffc107; color: #212529;">
+        Your password can’t be too similar to your other personal information. Your password must contain at least 8 characters. Your password can’t be a commonly used password. Your password can’t be entirely numeric.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
+        <input type="password" class="form-control" name="signup_passw2" placeholder="Confirm Password" required>
+      </div>
+      <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
+        <input type="text" class="form-control" name="referral_id" placeholder="Referral ID">
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </div>
+    </form>
+
+    <div style="display: flex; align-items: center; justify-content: center; margin-top: 20px;">
+      Already have an account? <a href="{% url 'login' %}" style="color: #212529;">Log In</a>
+    </div>
+  </div>
 </div>
 {% endblock %}
-
