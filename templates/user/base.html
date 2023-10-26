@@ -70,9 +70,16 @@
       .header:hover {
         background-color: rgb(100, 220, 224); /* Change the color on hover */
       }
+      #ksjfskjnvnj{
+        height: 490px;
+      }
       @media screen and (max-width: 900px) {
         .greetingmsg {
           display: none;
+        }
+        /* change height: of carosal in mobile view here*/
+        #ksjfskjnvnj{
+          height: 300px;
         }
       }
       @media screen and (min-width: 900px) {
@@ -116,7 +123,7 @@
     </div> -->
   </header><br>
   {% endif %}
-  <div class="main-content" style="background-color: blue; color: #fff; margin-top: 95px;">
+  <div class="main-content" style="background-color: blue; color: #fff; margin-top: 95px; min-height: 90vh;">
 
     {% block content %}{% endblock %}
   </div>
