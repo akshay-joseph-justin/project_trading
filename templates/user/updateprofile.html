@@ -30,7 +30,8 @@
       </div>
       <div class="row  m-5 p-1 text-center" >
         <div class="col">
-        <input type="username" class="form-control" placeholder="username" id="inputEmail3" value="{{ user.username | default:'' }}" name="uname" required>
+          <input type="username" class="form-control" placeholder="username" id="inputEmail3" value="{{ user.username | default:'' }}" name="uname" required readonly>
+
       </div>
     </div>
     <div class="row  m-5 p-2 text-center" >

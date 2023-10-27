@@ -19,8 +19,8 @@ OUR PLANS
                         <h4 class="fw-bold">{{ plan.plan_name }}</h4>
                     </div>
                     <div class="card-body" style="background-image: url({% static '/img/planbg.jpg' %});">
-                        <h5 class="card-title text-center text-light mb-4">Invest: ${{ plan.plan_min_price }} - ${{ plan.plan_max_price }}</h5>
-                        <h5 class="card-title text-center text-light mb-4">Profit: {{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%</h5>
+                        <h5 class="card-title text-center text-light mb-4">DEPOSIT: ${{ plan.plan_min_price }} - ${{ plan.plan_max_price }}</h5>
+                        <h5 class="card-title text-center text-light mb-4">PROFIT: {{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%</h5>
                         <div class="text-center">
                             <a href="{% url 'payment' %}" class="btn btn-success">Select Plan</a>
                         </div>

@@ -25,19 +25,19 @@ Sign Up
     <form method="POST" class="text-center">
       {% csrf_token %}
       <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
-        <input type="text" class="form-control" name="fname" placeholder="First Name" required>
+        <input type="text" class="form-control" name="fname" placeholder="First Name" value="{{ fname | default:'' }}" required>
       </div>
       <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
-        <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
+        <input type="text" class="form-control" name="lname" placeholder="Last Name" value="{{ lname | default:'' }}" required>
       </div>
       <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
-        <input type="email" class="form-control" name="signup_email" placeholder="Email" required>
+        <input type="email" class="form-control" name="signup_email" placeholder="Email" value="{{ email | default:'' }}" required>
       </div>
       <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
-        <input type="tel" class="form-control" name="contact" placeholder="Contact Number" required>
+        <input type="tel" class="form-control" name="contact" placeholder="Contact Number" value="{{ contact | default:'' }}" required>
       </div>
       <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
-        <input type="text" class="form-control" name="signup_uname" placeholder="Username" required>
+        <input type="text" class="form-control" name="signup_uname" placeholder="Username" value="{{ uname | default:'' }}" required>
       </div>
       <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
         <input type="password" class="form-control" name="signup_passw1" placeholder="Password" required>
@@ -50,7 +50,7 @@ Sign Up
         <input type="password" class="form-control" name="signup_passw2" placeholder="Confirm Password" required>
       </div>
       <div class="mb-3" style="display: flex; align-items: center; justify-content: center;">
-        <input type="text" class="form-control" name="referral_id" placeholder="Referral ID">
+        <input type="text" class="form-control" name="referral_id" placeholder="Referral ID" {{ referral | default:'' }} >
       </div>
       <div style="display: flex; align-items: center; justify-content: center;">
         <button type="submit" class="btn btn-primary">Sign Up</button>

@@ -13,17 +13,18 @@ Menu
         margin: 20px 0;
     }
 </style>
-<header class="  " style=" margin-left: 0; ">
+<header class="d-flex align-items-center pb-4 pt-4 ps-2 justify-content-between" style="background-image: url({% static '/img/bgm.jpg' %}); margin-left: 0; height: 120px; position: fixed; top: 0; width: 100%; z-index: 10;">
     
     <a class="navbar-brand d-flex align-items-center ml-4 mb-1 mt-1 mx-4" href="#" style="color: rgb(77, 196, 200)">
         <img src="{% static '/img/logo2.png' %}" class="logo-holder" style="width: 120px; height: auto;">
         <p class="pt-3 ps-2" style="font-size: 1.25rem; font-weight: bold; text-transform: uppercase;">AI-FX<br> TRADING</p>
+        
       </a> 
-    
-     
+      <a href="javascript:history.back()" class="fa-solid fa-xmark" style="color: #4dc4c8;font-size: 3rem; margin-right: 15px;"></a>
+      
    </header>
 
-<ul style=" margin-top: 40px; min-height: 80vh; list-style: none;" class=" ">
+<ul style=" margin-top: 190px; min-height: 80vh; list-style: none;" class=" ">
     <li class="list-item">
     <div class="sidenav-header " style="background-color: transparent; height: 88px;">
         <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>
@@ -63,7 +64,7 @@ Menu
         <div>
 
             <a class="nav-item py-3  text-primary fw-bold" href="{% url 'payment' %}">
-                <i class="fa-solid fa-money-bill-transfer text-primary" style="color:black; font-size: 1.5rem;"></i> INVEST
+                <i class="fa-solid fa-money-bill-transfer text-primary" style="color:black; font-size: 1.5rem;"></i> DEPOSIT
             </a>
         </div>
       </li>

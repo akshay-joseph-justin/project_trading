@@ -76,17 +76,17 @@ class Signup_view(View):
         if models.User.objects.filter(email=email).exists() == True:
 
             messages.error(request, f"an account exists in this email {email}")
-            return redirect("/signup")
+            return render(request, "signup.html", context=temp_context)
         
         if models.User.objects.filter(username=uname).exists() == True:
 
             messages.error(request, "username is taken")
-            return redirect("/signup")
+            return render(request, "signup.html", context=temp_context)
         
         if models.User.objects.filter(username=uname, email=email).exists() == True:
 
             messages.error(request, "user already exists")
-            return redirect("/signup")
+            return render(request, "signup.html", context=temp_context)
         
         try:
             int(contact)
@@ -117,7 +117,6 @@ class Signup_view(View):
         if len(referral_id) > 5:
             if models.Referral.objects.filter(referral_id=referral_id).exists():
                 self.add_referred(request.user, referral_id)
-                print("referral tree")
             else:
                 messages.error(request, "Referral number did not exists")
                 return redirect("/signup")
@@ -308,7 +307,10 @@ class ChangePassword_view(View):
 
     def get(self, request):
 
-        return render(request, "changepassw.html")
+        if request.user.is_superuser:
+            return render(request, "mod/changepassw.html")
+
+        return render(request, "user/changepassw.html")
     
     def post(self, request):
 
@@ -403,7 +405,7 @@ class Withdraw_view(View):
 
         user_plan = models.User_plan.objects.get(user=request.user)
 
-        if float(withdraw_amount) > float(user_plan.user_profit):
+        if float(withdraw_amount) > float(user_plan.total_profit):
 
             messages.error(request, "insufficient fund")
             return redirect("/withdraw")
@@ -435,8 +437,8 @@ class Refer_view(View):
 
         referral_id = request.POST["referred_id"]
 
-        if not models.Referral.objects.filter(referral_id=referral_id):
-
+        if not models.Referral.objects.filter(referral_id=referral_id).exists():
+            messages.error(request, "Referral number did not exists")
             return redirect("/refer")
 
         referrer = models.Referral.objects.get(user=request.user)
@@ -447,6 +449,7 @@ class Refer_view(View):
         referred.direct.add(request.user)
         referred.save()
 
+        messages.success(request, "Refer success")
         return redirect("/refer")
 
 class UpdateReferDetails_view(View):
@@ -530,9 +533,9 @@ class History_view(View):
             
             user = models.User.objects.get(id=kwargs['id'])
             context = {
-                "payments": models.Payment.objects.filter(user=user),
-                "withdraws":  models.Withdraw.objects.filter(user=user),
-                "addprofits": models.Addprofit.objects.filter(user=user),
+                "payments": models.Payment.objects.filter(user=user)[::-1],
+                "withdraws":  models.Withdraw.objects.filter(user=user)[::-1],
+                "addprofits": models.Addprofit.objects.filter(user=user)[::-1],
                 "action": action,
                 "user": user,
                 "admin": True,
@@ -541,9 +544,9 @@ class History_view(View):
             return render(request, "mod/history.html", context=context)
 
         context = {
-            "payments": models.Payment.objects.filter(user=request.user),
-            "withdraws": models.Withdraw.objects.filter(user=request.user),
-            "addprofits": models.Addprofit.objects.filter(user=request.user),
+            "payments": models.Payment.objects.filter(user=request.user)[::-1],
+            "withdraws": models.Withdraw.objects.filter(user=request.user)[::-1],
+            "addprofits": models.Addprofit.objects.filter(user=request.user)[::-1],
             "action": action,
         }
 
@@ -569,7 +572,7 @@ class ModDashboard_view(View):
                 chats.append(lst)
 
         context = {
-            "chats": chats,
+            "chats": chats[::-1],
         }
         return render(request, 'mod/index.html', context=context)
 
@@ -583,13 +586,13 @@ class ModMembers_view(View):
         if "status" in kwargs:
             
             context = {
-                "members": [[member, referred] for member in models.User_plan.objects.filter(user_status=kwargs["status"]) for referred in models.Referral.objects.filter(user=member.user)],
+                "members": [[member, referred] for member in models.User_plan.objects.filter(user_status=kwargs["status"]) for referred in models.Referral.objects.filter(user=member.user)][::-1],
             }
 
             return render(request, 'mod/membersactive.html', context=context)
 
         context = {
-            "members": [ [user, referred, user_plan] for user in User.objects.all() if not user.is_superuser for referred in models.Referral.objects.filter(user=user) for user_plan in models.User_plan.objects.filter(user=user)],
+            "members": [ [user, referred, user_plan] for user in User.objects.all() if not user.is_superuser for referred in models.Referral.objects.filter(user=user) for user_plan in models.User_plan.objects.filter(user=user)][::-1],
         }
 
         return render(request, 'mod/members.html', context=context)
@@ -645,7 +648,7 @@ class ModPayments_view(View):
 
         
         context = {
-            "payments": models.Payment.objects.filter(transaction_status=action),
+            "payments": models.Payment.objects.filter(transaction_status=action)[::-1],
             "action": action,
         }
 
@@ -665,46 +668,42 @@ class ModPayments_view(View):
             referral_1 = models.Referral.objects.get(user=referral.referred_user)
             user_plan_1 = models.User_plan.objects.get(user=referral.referred_user)
             addprofit = models.Addprofit()
-            addprofit.user = user
+            addprofit.user = referral_1.user
             addprofit.plan = user_plan_1.plan
             addprofit.referral_profit = (float(amount)*(float(referral_1.referral_details.spot_percent_direct)/100))
             addprofit.save()
-            user_plan = models.User_plan.objects.get(user=referral.referred_user)
-            user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_1.referral_details.spot_percent_direct)/100))
-            user_plan.save()
+            user_plan_1.user_referral_profit = float(user_plan_1.user_referral_profit) + (float(amount)*(float(referral_1.referral_details.spot_percent_direct)/100))
+            user_plan_1.save()
             if referral_1.referred_user is not None:
                 referral_2 = models.Referral.objects.get(user=referral_1.referred_user)
                 user_plan_2 = models.User_plan.objects.get(user=referral_1.referred_user)
                 addprofit = models.Addprofit()
-                addprofit.user = user
+                addprofit.user = referral_2.user
                 addprofit.plan = user_plan_2.plan
                 addprofit.referral_profit = (float(amount)*(float(referral_2.referral_details.spot_percent_level_1)/100))
                 addprofit.save()
-                user_plan = models.User_plan.objects.get(user=referral_1.referred_user)
-                user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_2.referral_details.spot_percent_level_1)/100))
-                user_plan.save()
+                user_plan_2.user_referral_profit = float(user_plan_2.user_referral_profit) + (float(amount)*(float(referral_2.referral_details.spot_percent_level_1)/100))
+                user_plan_2.save()
                 if referral_2.referred_user is not None:
                     referral_3 = models.Referral.objects.get(user=referral_2.referred_user)
                     user_plan_3 = models.User_plan.objects.get(user=referral_2.referred_user)
                     addprofit = models.Addprofit()
-                    addprofit.user = user
+                    addprofit.user = referral_3.user
                     addprofit.plan = user_plan_3.plan
                     addprofit.referral_profit = (float(amount)*(float(referral_3.referral_details.spot_percent_level_2)/100))
                     addprofit.save()
-                    user_plan = models.User_plan.objects.get(user=referral_2.referred_user)
-                    user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_3.referral_details.spot_percent_level_2)/100))
-                    user_plan.save()
+                    user_plan_3.user_referral_profit = float(user_plan_3.user_referral_profit) + (float(amount)*(float(referral_3.referral_details.spot_percent_level_2)/100))
+                    user_plan_3.save()
                     if referral_3.referred_user is not None:
                         referral_4 = models.Referral.objects.get(user=referral_3.referred_user)
                         user_plan_4 = models.User_plan.objects.get(user=referral_3.referred_user)
                         addprofit = models.Addprofit()
-                        addprofit.user = user
+                        addprofit.user = referral_4.user
                         addprofit.plan = user_plan_4.plan
                         addprofit.referral_profit = (float(amount)*(float(referral_4.referral_details.spot_percent_level_3)/100))
                         addprofit.save()
-                        user_plan = models.User_plan.objects.get(user=referral_3.referred_user)
-                        user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_4.referral_details.spot_percent_level_3)/100))
-                        user_plan.save()
+                        user_plan_4.user_referral_profit = float(user_plan_4.user_referral_profit) + (float(amount)*(float(referral_4.referral_details.spot_percent_level_3)/100))
+                        user_plan_4.save()
 
 class ModWithdraw_view(View):
     
@@ -723,7 +722,7 @@ class ModWithdraw_view(View):
             if action == "done":
                 
                 user_plan = models.User_plan.objects.get(user=withdraw.user)
-                user_plan.user_profit = str(float(user_plan.user_profit) - float(withdraw.withdraw_amount))
+                user_plan.total_profit = str(float(user_plan.total_profit) - float(withdraw.withdraw_amount))
                 user_plan.save()
                 withdraw.withdraw_status = "done"
                 withdraw.save()
@@ -741,7 +740,7 @@ class ModWithdraw_view(View):
 
         status = kwargs["status"]
         context = {
-            "withdraws": models.Withdraw.objects.filter(withdraw_status=status),
+            "withdraws": models.Withdraw.objects.filter(withdraw_status=status)[::-1],
             "status": status,
         }
 
@@ -920,46 +919,42 @@ class ModAddProfit_view(View):
             referral_1 = models.Referral.objects.get(user=referral.referred_user)
             user_plan_1 = models.User_plan.objects.get(user=referral.referred_user)
             addprofit = models.Addprofit()
-            addprofit.user = user
+            addprofit.user = referral_1.user
             addprofit.plan = user_plan_1.plan
-            addprofit.referral_profit = (float(amount)*(float(referral_1.referral_details.percent_direct)/100))
+            addprofit.referral_profit = (float(amount)*(float(referral_1.referral_details.spot_percent_direct)/100))
             addprofit.save()
-            user_plan = models.User_plan.objects.get(user=referral.referred_user)
-            user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_1.referral_details.percent_direct)/100))
-            user_plan.save()
+            user_plan_1.user_referral_profit = float(user_plan_1.user_referral_profit) + (float(amount)*(float(referral_1.referral_details.spot_percent_direct)/100))
+            user_plan_1.save()
             if referral_1.referred_user is not None:
                 referral_2 = models.Referral.objects.get(user=referral_1.referred_user)
                 user_plan_2 = models.User_plan.objects.get(user=referral_1.referred_user)
                 addprofit = models.Addprofit()
-                addprofit.user = user
+                addprofit.user = referral_2.user
                 addprofit.plan = user_plan_2.plan
-                addprofit.referral_profit = (float(amount)*(float(referral_2.referral_details.percent_level_1)/100))
+                addprofit.referral_profit = (float(amount)*(float(referral_2.referral_details.spot_percent_level_1)/100))
                 addprofit.save()
-                user_plan = models.User_plan.objects.get(user=referral_1.referred_user)
-                user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_2.referral_details.percent_level_1)/100))
-                user_plan.save()
+                user_plan_2.user_referral_profit = float(user_plan_2.user_referral_profit) + (float(amount)*(float(referral_2.referral_details.spot_percent_level_1)/100))
+                user_plan_2.save()
                 if referral_2.referred_user is not None:
                     referral_3 = models.Referral.objects.get(user=referral_2.referred_user)
                     user_plan_3 = models.User_plan.objects.get(user=referral_2.referred_user)
                     addprofit = models.Addprofit()
-                    addprofit.user = user
+                    addprofit.user = referral_3.user
                     addprofit.plan = user_plan_3.plan
-                    addprofit.referral_profit = (float(amount)*(float(referral_3.referral_details.percent_level_2)/100))
+                    addprofit.referral_profit = (float(amount)*(float(referral_3.referral_details.spot_percent_level_2)/100))
                     addprofit.save()
-                    user_plan = models.User_plan.objects.get(user=referral_2.referred_user)
-                    user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_3.referral_details.percent_level_2)/100))
-                    user_plan.save()
+                    user_plan_3.user_referral_profit = float(user_plan_3.user_referral_profit) + (float(amount)*(float(referral_3.referral_details.spot_percent_level_2)/100))
+                    user_plan_3.save()
                     if referral_3.referred_user is not None:
                         referral_4 = models.Referral.objects.get(user=referral_3.referred_user)
                         user_plan_4 = models.User_plan.objects.get(user=referral_3.referred_user)
                         addprofit = models.Addprofit()
-                        addprofit.user = user
+                        addprofit.user = referral_4.user
                         addprofit.plan = user_plan_4.plan
-                        addprofit.referral_profit = (float(amount)*(float(referral_4.referral_details.percent_level_3)/100))
+                        addprofit.referral_profit = (float(amount)*(float(referral_4.referral_details.spot_percent_level_3)/100))
                         addprofit.save()
-                        user_plan = models.User_plan.objects.get(user=referral_3.referred_user)
-                        user_plan.user_referral_profit = float(user_plan.user_referral_profit) + (float(amount)*(float(referral_4.referral_details.percent_level_3)/100))
-                        user_plan.save()
+                        user_plan_4.user_referral_profit = float(user_plan_4.user_referral_profit) + (float(amount)*(float(referral_4.referral_details.spot_percent_level_3)/100))
+                        user_plan_4.save()
 
 class ModMember_view(View):
 
