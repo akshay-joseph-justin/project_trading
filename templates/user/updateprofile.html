@@ -10,7 +10,7 @@
 
 
 <div style="display: flex; align-items: center; justify-content: center">
-  <div class="" style="display: flex; align-items: center; justify-content: center; border-radius: 50%;  background-color: rgb(77, 196, 200); width: 100px; height: 100px;"> 
+  <div class="mt-4" style="display: flex; align-items: center; justify-content: center; border-radius: 50%;  background-color: rgb(77, 196, 200); width: 100px; height: 100px;"> 
       <i class="fa-solid fa-user" style="color: black; font-size: 4rem"></i><br>
   </div>  
 </div>
@@ -54,30 +54,5 @@
 
 
 
-<div class="row g-3 m-5 p-2 text-center" >
-  <div class="col">
-    <h4 class="fw-bold">USERNAME</h4>
-    <h5 class="fw-lighter">{{ user.username }}</h5>
-  </div>
-  <div class="col">
-    <h4 class="fw-bold">FULL NAME</h4>
-    <h4>{{ user.get_full_name }}</h4>
-  </div>
-</div>
-<div class="row g-3 m-5 p-2 text-center" >
-  <div class="col">
-    <h4 class="fw-bold">MOBILE NUMBER</h4>
-    <h4>{{ user_plan.contact }}</h4>
-  </div>
-  <div class="col">
-    <h4 class="fw-bold">EMAIL</h4>
-    <h4>{{ user.email }}</h4>
-  </div>
-</div>
-<div class="row g-3 m-5 p-2 text-center" >
-  
-  <div class="col">
-    <a href="{% url 'profile_update' id=9576414653 %}" class="btn btn-secondary mt-3">Edit Profile</a>
-  </div>
-</div>
+
 {% endblock %}

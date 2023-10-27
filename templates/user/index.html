@@ -15,7 +15,7 @@
     </div>
 
     {% load static %}
-    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleAutoplaying" class="carousel slide mb-3" data-bs-ride="carousel">
       <div class="carousel-inner" id="ksjfskjnvnj">
         <div class="carousel-item active" style="width: 100%; height: 100%;background-image: url({% static '/img/cars.jpg' %}); background-repeat: no-repeat; background-size: cover; ">
         </div>
@@ -45,17 +45,16 @@
 
     <div class="row" style="border-bottom: 2px solid #343a40;">
         {% if user_plans %}
-            <h1 class="h2 p-5"> </h1>
-            <br>
+            
             {% for user_plan in user_plans %}
                 {% if user_plan.invested_amount != "0" %}
-                <div class="container-fluid bg-primary py-3">
-                  <div class="row">
-                      <div class="col-md-12 text-center">
-                          <h1 class="text-white">{{ user_plan.plan.plan_name }}</h1>
+                
+                    <div  class="d-grid gap-2 mt-5" style="text-decoration: none;">
+                        <div class="header text-primary fw-bold">
+                          <h1 class="">{{ user_plan.plan.plan_name }}</h1>
                       </div>
                   </div>
-              </div>
+             
               <div class="container my-5">
                         <div class="row">
                             <div class="col-md-6 col-lg-4 mb-4">
@@ -132,15 +131,15 @@
                         <a class="btn btn-primary" href="{% url 'withdraw' %}" type="button">CLICK HERE TO WITHDRAW</a>
                     </div>
                     <br>
-                    <hr>
+                   
                     <div class="row">
                       {% for plan in plans %}
-                      <div class="col-md-4">
+                      <div class="col-md-4 mt-5">
                           <div class="card mb-3">
                               <div class="card-header bg-primary text-white text-center">
                                   <h4 class="fw-bold">{{ plan.plan_name }}</h4>
                               </div>
-                              <div class="card-body" style="background-image: url(https://images.unsplash.com/photo-1640340434855-6084b1f4901c?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYWRpbmd8ZW58MHx8MHx8fDA%3D);">
+                              <div class="card-body" style="background-image: url({% static '/img/planbg.jpg' %});">
                                   <h5 class="card-title text-center text-light mb-4">Invest: ${{ plan.plan_min_price }} - ${{ plan.plan_max_price }}</h5>
                                   <h5 class="card-title text-center text-light mb-4">Profit: {{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%</h5>
                                   <div class="text-center">
@@ -152,24 +151,25 @@
                   {% endfor %}
                     </div>
                 {% else %}
-                    <div class="d-grid gap-2">
-                        <div class="header">
-                            <h2 >SEL</h2>
-                        </div>
+                <a href="{% url 'plans' %}" class="d-grid gap-2" style="text-decoration: none;">
+                    <div class="header text-primary fw-bold">
+                        <h2 class="fw-bold">SELECT YOUR PLAN</h2>
                     </div>
+                </a>
+                
                     <div class="container my-5">
                         <div class="row">
-                            <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
                                 <div class="card">
                                     <img src="{% static '/img/bg.jpg' %}" class="card-img" alt="...">
                                     <div class="card-img-overlay text-center text-white">
-                                        <i class="fa-solid fa-money-bill-transfer"
-                                            style="color:white; font-size: 3rem;"></i><br><br>
-                                        <h5 class="lead font-italic card-title fw-bold"> INVESTED</h5>
+                                        <i class="fa-solid fa-money-bill-transfer" style="color:white; font-size: 3rem;"></i><br><br>
+                                        <h5 class="lead font-italic card-title fw-bold">INVESTED</h5>
                                         <p class="lead font-italic card-title fw-light">$0</p>
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="col-md-6 col-lg-4 mb-4">
                                 <div class="card">
                                     <img src="{% static '/img/bg.jpg' %}" class="card-img" alt="...">
@@ -181,12 +181,11 @@
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4 mb-4">
-                                <div class "card">
+                                <div class="card">
                                     <img src="{% static '/img/bg.jpg' %}" class="card-img" alt="...">
                                     <div class="card-img-overlay text-center text-white">
-                                        <i class="fa-solid fa-regular fa-calendar-days"
-                                            style="color: white; font-size: 3rem;"></i><br><br>
-                                        <h5 class="lead font-italic card-title fw-bold">DAYS</h5>
+                                        <i class="fa-solid fa-calendar-days" style="color: white; font-size: 3rem;"></i><br><br>
+                                        <h5 class="lead font-italic card-title fw-bold"> DAYS</h5>
                                         <p class="lead font-italic card-title fw-light">0</p>
                                     </div>
                                 </div>
@@ -233,15 +232,15 @@
                         <a class="btn btn-primary" href="{% url 'withdraw' %}" type="button">CLICK HERE TO WITHDRAW</a>
                     </div>
                     <br>
-                    <hr>
+                    
                     <div class="row">
                       {% for plan in plans %}
-            <div class="col-md-4">
+            <div class="col-md-4 mt-5">
                 <div class="card mb-3">
                     <div class="card-header bg-primary text-white text-center">
                         <h4 class="fw-bold">{{ plan.plan_name }}</h4>
                     </div>
-                    <div class="card-body" style="background-image: url(https://images.unsplash.com/photo-1640340434855-6084b1f4901c?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYWRpbmd8ZW58MHx8MHx8fDA%3D);">
+                    <div class="card-body" style="background-image: url({% static '/img/planbg.jpg' %});">
                         <h5 class="card-title text-center text-light mb-4">Invest: ${{ plan.plan_min_price }} - ${{ plan.plan_max_price }}</h5>
                         <h5 class="card-title text-center text-light mb-4">Profit: {{ plan.plan_min_percentage }}% - {{ plan.plan_max_percentage }}%</h5>
                         <div class="text-center">
@@ -252,10 +251,10 @@
             </div>
         {% endfor %}
                   </div>
-                  <div class="d-grid gap-2 col-6 mx-auto">
-                      <a class="btn btn-primary" href="{% url 'withdraw' %}" type="button">CLICK HERE TO WITHDRAW</a>
+                  <div class="d-grid gap-2 col-6 mt-5 mb-5 mx-auto">
+                      <a class="btn btn-primary" href="{% url 'payment' %}" type="button">CLICK HERE TO INVEST</a>
                   </div>
-                  <hr>
+                  
                 {% endif %}
             {% endfor %}
         {% endif %}

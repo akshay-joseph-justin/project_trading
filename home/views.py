@@ -36,7 +36,7 @@ class Dashboard_view(View):
         payments = [payment for payment in models.Payment.objects.filter(user=request.user) if payment.transaction_status != "approved"]
         withdraws = [withdraw for withdraw in models.Withdraw.objects.filter(user=request.user) if withdraw.withdraw_status != "done"]
         refer = models.Referral.objects.get(user=request.user)
-        team_no = len(refer.direct)
+        team_no = refer.direct.all().count()
 
         context = {
             "user_plans": user_plans,

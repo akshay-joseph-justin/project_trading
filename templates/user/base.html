@@ -57,7 +57,7 @@
       }
       
       .header {
-        background-color: rgb(77, 196, 200);
+        background-color: white;
         text-align: center;
         padding: 20px;
         font-size: 24px;
@@ -93,14 +93,14 @@
 <body style="background-image: url({% static '/img/bgm.jpg' %})">
    {% include 'user/navbar.html' %}
    {% if user.is_authenticated %}
-   <header class="d-flex align-items-center pb-4 pt-4 ps-2" style="background-image: url({% static '/img/bgm.jpg' %}); margin-left: 0; height: 120px; position: fixed; top: 0; width: 100%; z-index: 10;">
-    <a class="navbar-brand d-flex align-items-center ml-4 mb-2 mt-4 mx-4" href="#" style="color: rgb(77, 196, 200)">
-      <img src="{% static '/img/logo2.png' %}" class="logo-holder" style="width: 120px; height: auto;">
+   <header class="d-flex align-items-center pb-4 pt-4 ps-2 justify-content-between" style="background-image: url({% static '/img/bgm.jpg' %}); margin-left: 0; height: 120px; position: fixed; top: 0; width: 100%; z-index: 10;">
+    <a class="navbar-brand d-flex align-items-center ml-3 mb-2 mt-4 mx-3" href="#" style="color: rgb(77, 196, 200)">
+      <img src="{% static '/img/logo2.png' %}" class="logo-holder" style="width: 90px; height: auto;">
       <p class="pt-3 ps-2" style="font-size: 1.25rem; font-weight: bold; text-transform: uppercase;">AI-FX<br> TRADING</p>
     </a>
     <h4 class="greetingmsg text-light p-4 text fw-bold">Welcome Back, {{ user.get_full_name }}</h4>
     <!-- <button class="toggle-btn" id="sidebar-toggle-btn-2"><i class="fa-solid fa-bars"></i></button> -->
-    <a href="{% url 'navmenu' %}" class="btn jargffkwgf"><i class="fa-solid fa-bars" style="font-size: 2rem; color: #eeeeee;"></i></a>
+    <a href="{% url 'navmenu' %}" class="btn jargffkwgf "><i class="fa-solid fa-bars " style=" font-size: 2rem; color: #eeeeee;"></i></a>
 
     <!-- <div class="sidenav-header py-2" style="background-color: transparent; height: 100px;">
       <button class="toggle-btn" style="visibility: hidden;" id="sidebar-toggle-btn-1">&equiv;</button>

@@ -36,33 +36,37 @@ MY PROFILE
 </div>
 <br>
 
-<h2 class="text-center fw-bold">MY PROFILE</h2>
+<h2 class="text-center fw-bold text-black">MY PROFILE</h2>
 
 
-<div class="row g-3 m-5 p-2 text-center" >
+<div class="row g-3 mt-5 p-2 text-center" >
   <div class="col">
-    <h4 class="fw-bold">USERNAME</h4>
+    <h4 class="fw-bold text-dark">USERNAME</h4>
     <h5 class="fw-lighter">{{ user.username }}</h5>
   </div>
   <div class="col">
-    <h4 class="fw-bold">FULL NAME</h4>
+    <h4 class="fw-bold text-dark">FULL NAME</h4>
     <h4>{{ user.get_full_name }}</h4>
   </div>
 </div>
-<div class="row g-3 m-5 p-2 text-center" >
+<div class="row g-3 mt-5 p-2 text-center" >
   <div class="col">
-    <h4 class="fw-bold">MOBILE NUMBER</h4>
+    <h4 class="fw-bold text-dark">MOBILE NUMBER</h4>
     <h4>{{ user_plan.contact }}</h4>
   </div>
   <div class="col">
-    <h4 class="fw-bold">EMAIL</h4>
+    <h4 class="fw-bold text-dark">EMAIL</h4>
     <h4>{{ user.email }}</h4>
   </div>
 </div>
-<div class="row g-3 m-5 p-2 text-center" >
+<div class="row g-3 mt-5 p-2 text-center" >
   
   <div class="col">
     <a href="{% url 'profile_update' id=9576414653 %}" class="btn btn-secondary mt-3">Edit Profile</a>
   </div>
 </div>
+<div class="d-grid gap-2 col-6 mx-auto">
+  <a class="btn btn-primary" href="{% url 'passw_change' %}" type="button">CHANGE PASSWORD</a>
+</div>
+
 {% endblock %}

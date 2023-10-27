@@ -16,30 +16,30 @@ REFER
 </div>
 
 <div class="mt-5" style="height: 75vh;">
-  <h1 class="text-center">Referral</h1>
-  <div class="row justify-content-center mt-4">
+  <h1 class="text-center fw-bold">REFFERAL</h1>
+  <div class="row justify-content-center mt- text-center">
       <div class="col-md-6">
         <div class="card border-0 shadow p-3">
           <div class="card-header bg-primary text-light text-center">
               Referral ID: {{ refer.referral_id }}
-          </div>
-          <div class="card-body">
+          </div><br>
+          <div class="card-bod text-center">
               {% if refer.referred_user %}
-                  <div class="row">
-                      <div class="col-md-4">
-                          <ul class="list-group">
-                              <li class="list-group-item bg-light">
-                                  Referred by:
+                  
+                      <div class="col-md-18">
+                          <ul class="list-group text-center">
+                              <li class="list-group-item bg-light fw-bold">
+                                  Referred By
                               </li>
                               <li class="list-group-item">
                                   {{ refer.referred_user }}
                               </li>
                           </ul>
-                      </div>
-                      <div class="col-md-8">
-                          <ul class="list-group">
-                              <li class="list-group-item bg-light">
-                                  Referred members:
+                      </div><br><br>
+                      <div class="col-md-18 text-center">
+                          <ul class="list-group ">
+                              <li class="list-group-item bg-light fw-bold">
+                                  Team
                               </li>
                               {% for member in members %}
                                   <li class="list-group-item">
@@ -48,7 +48,7 @@ REFER
                               {% endfor %}
                           </ul>
                       </div>
-                  </div>
+                 
               {% else %}
                   <form method="POST">
                       {% csrf_token %}
