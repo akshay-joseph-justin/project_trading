@@ -96,7 +96,7 @@ class Signup_view(View):
         
         try:
             validate_password(passw1)
-        except ValidationError:
+        except ValidationError as e:
             messages.error(request, "password validation error")
             return render(request, "signup.html", context=temp_context)
 
@@ -113,7 +113,6 @@ class Signup_view(View):
 
         self.add_user_plan(request.user, contact)
         self.add_referral(request.user)
-        print(f"refer [{referral_id}]")
         if len(referral_id) > 5:
             if models.Referral.objects.filter(referral_id=referral_id).exists():
                 self.add_referred(request.user, referral_id)
