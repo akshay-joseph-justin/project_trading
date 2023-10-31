@@ -8,11 +8,12 @@
                        {% if user.is_authenticated %}
                     
                     <li class="list-item py-2">
-                        <a href="{% url 'logout' %}" class="text-dark"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                        <a href="{% url 'passw_change' %}" class="text-dark"><i class="fa-solid fa-pen-to-square"></i> Change Password</a>
                     </li>
                     <li class="list-item py-2">
-                        <a href="{% url 'passw_change' %}" class="text-dark"><i class="fa-solid fa-right-from-bracket"></i> Change Password</a>
+                        <a href="{% url 'logout' %}" class="text-dark"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                     </li>
+
                     {% else %}
                     <li class="list-item py-2">
                         <a href="{% url 'signup' %}">Sign Up</a>

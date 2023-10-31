@@ -15,7 +15,7 @@ REFER
 {% endfor %}
 </div>
 
-<div class="mt-5" style="height: 75vh;">
+<div class="mt-5" style="height: ;">
   <h1 class="text-center fw-bold">REFFERAL</h1>
   <div class="row justify-content-center mt- text-center">
       <div class="col-md-6">
@@ -24,32 +24,7 @@ REFER
               Referral ID: {{ refer.referral_id }}
           </div><br>
           <div class="card-bod text-center">
-              {% if refer.referred_user %}
-                  
-                      <div class="col-md-18">
-                          <ul class="list-group text-center">
-                              <li class="list-group-item bg-light fw-bold">
-                                  Referred By
-                              </li>
-                              <li class="list-group-item">
-                                  {{ refer.referred_user }}
-                              </li>
-                          </ul>
-                      </div><br><br>
-                      <div class="col-md-18 text-center">
-                          <ul class="list-group ">
-                              <li class="list-group-item bg-light fw-bold">
-                                  Team
-                              </li>
-                              {% for member in members %}
-                                  <li class="list-group-item">
-                                      {{ member.username }}
-                                  </li>
-                              {% endfor %}
-                          </ul>
-                      </div>
-                 
-              {% else %}
+              {% if not refer.referred_user %}
                   <form method="POST">
                       {% csrf_token %}
                       <div class="form-group">
@@ -65,5 +40,84 @@ REFER
       </div>
   </div>
 </div>
+
+
+<div class="" style="margin-top: 70px;">
+    <h1 class="text-center fw-bold">TEAM</h1>
+    <div class="row justify-content-center mt- text-center">
+        <div class="col-md-6">
+          <div class="card border-0 shadow p-3">
+            
+            <div class="card-bod text-center">
+              
+                    
+                        <div class="col-md-18">
+                            <ul class="list-group text-center">
+                               
+                            </ul>
+                        </div><br>
+                        <div class="col-md-18 text-center">
+                            <ul class="list-group ">
+                                <li class="list-group-item bg-light fw-bold">
+                                    DIRECT
+                                </li>
+                                {% for direct in refer.direct.all %}
+                                <li class="list-group-item">
+                                    {{ direct.username }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="col-md-18 text-center">
+                            <ul class="list-group ">
+                                <li class="list-group-item bg-light fw-bold">
+                                    LEVEL 1
+                                </li>
+                               
+                                {% for level_1 in refer.level_1.all %}
+                                <li class="list-group-item">
+                                    {{ level_1.username }}
+                                </li>
+                                {% endfor %}
+                               
+                            </ul>
+                        </div>
+                        <div class="col-md-18 text-center">
+                            <ul class="list-group ">
+                                <li class="list-group-item bg-light fw-bold">
+                                    LEVEL 2
+                                </li>
+                               
+                                {% for level_2 in refer.level_2.all %}
+                                <li class="list-group-item">
+                                    {{ level_2.username }}
+                                </li>
+                                {% endfor %}
+                               
+                            </ul>
+                        </div>
+                        <div class="col-md-18 text-center">
+                            <ul class="list-group ">
+                                <li class="list-group-item bg-light fw-bold">
+                                    LEVEL 3
+                                </li>
+                               
+                                {% for level_3 in refer.level_3.all %}
+                                <li class="list-group-item">
+                                    {{ level_3.username }}
+                                </li>
+                                {% endfor %}
+                               
+                            </ul>
+                        </div>
+                   
+                
+            </div>
+        </div>
+        </div>
+    </div>
+  </div>
+
+    
 
 {% endblock %}

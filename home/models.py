@@ -76,6 +76,7 @@ class Referral(models.Model):
     level_1 = models.ManyToManyField(User, blank=True, related_name="%(class)s_level1")
     level_2 = models.ManyToManyField(User, blank=True, related_name="%(class)s_level2")
     level_3 = models.ManyToManyField(User, blank=True, related_name="%(class)s_level3")
+    
 
 class Chat(models.Model):
 

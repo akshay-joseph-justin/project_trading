@@ -18,6 +18,7 @@ ADMIN ACTIVE USERS
         <th scope="col">PLAN</th>
         <th scope="col">AMOUT</th>
         <th scope="col">PROFIT</th>
+        <th scope="col">DAYS</th>
         <th scope="col">REFFERED BY</th>
         <th scope="col"> DETAILS </th>
       </tr>
@@ -30,6 +31,7 @@ ADMIN ACTIVE USERS
         <td>{{ member.plan.plan_name }}</td>
         <td>{{ member.invested_amount }}</td>
         <td>{{ member.user_profit }}</td>
+        <td>{{ member.days }}</td>
         <td>{{ refferd.referred_user.username }}</td>
         <td>
         <a href="{% url 'mod_member' id=member.user.id %}" class="btn btn-secondary"> view </a>

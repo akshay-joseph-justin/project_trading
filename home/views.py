@@ -158,12 +158,15 @@ class Signup_view(View):
         if referred_user.referred_user is not None:
             referred_user_1 = models.Referral.objects.get(user=referred_user.referred_user)
             referred_user_1.level_1.add(referrer_user.user)
+            referred_user_1.save()
             if referred_user_1.referred_user is not None:
                 referred_user_2 = models.Referral.objects.get(user=referred_user_1.referred_user)
                 referred_user_2.level_2.add(referrer_user.user)
+                referred_user_2.save()
                 if referred_user_2.referred_user is not None:
                     referred_user_3 = models.Referral.objects.get(user=referred_user_2.referred_user)
                     referred_user_3.level_3.add(referrer_user.user)
+                    referred_user_3.save()
 
 
 class Login_view(View):
@@ -428,6 +431,7 @@ class Refer_view(View):
         context = {
             "refer": models.Referral.objects.get(user=request.user),
             "members": models.Referral.objects.get(user=request.user).direct.all(),
+            "team": models.Referral.objects.all(),
         }
 
         return render(request, 'user/refer.html', context=context)
@@ -440,22 +444,60 @@ class Refer_view(View):
             messages.error(request, "Referral number did not exists")
             return redirect("/refer")
 
-        referrer = models.Referral.objects.get(user=request.user)
-        referred = models.Referral.objects.get(referral_id=referral_id)
-
-        referrer.referred_user = referred.user
-        referrer.save()
-        referred.direct.add(request.user)
-        referred.save()
+        self.add_referred(request.user, referral_id)
 
         messages.success(request, "Refer success")
         return redirect("/refer")
+
+    def add_referred(self, user, id):
+
+        referred_user = models.Referral.objects.get(referral_id=id)
+        referred_user.direct.add(user)
+        referred_user.save()
+        
+        referrer_user = models.Referral.objects.get(user=user)
+        referrer_user.referred_user = referred_user.user
+        referrer_user.save()
+
+        if referred_user.referred_user is not None:
+            referred_user_1 = models.Referral.objects.get(user=referred_user.referred_user)
+            referred_user_1.level_1.add(referrer_user.user)
+            referred_user_1.save()
+            if referred_user_1.referred_user is not None:
+                referred_user_2 = models.Referral.objects.get(user=referred_user_1.referred_user)
+                referred_user_2.level_2.add(referrer_user.user)
+                referred_user_2.save()
+                if referred_user_2.referred_user is not None:
+                    referred_user_3 = models.Referral.objects.get(user=referred_user_2.referred_user)
+                    referred_user_3.level_3.add(referrer_user.user)
+                    referred_user_3.save()
 
 class UpdateReferDetails_view(View):
 
     def get(self, request):
 
         return render(request, "mod/referplan.html", {"details": models.ReferralDetails.objects.get(id=1)})
+        
+    def post(self, request):
+        
+        content = {}
+        print(request.POST)
+        if "spot" in request.POST:
+            content["spot_percent_direct"] = request.POST["spot_percent_direct"]
+            content["spot_percent_level_1"] = request.POST["spot_percent_level_1"]
+            content["spot_percent_level_2"] = request.POST["spot_percent_level_2"]
+            content["spot_percent_level_3"] = request.POST["spot_percent_level_3"]
+        elif "week" in request.POST:
+            content["percent_direct"] = request.POST["percent_direct"]
+            content["percent_level_1"] = request.POST["percent_level_1"]
+            content["percent_level_2"] = request.POST["percent_level_2"]
+            content["percent_level_3"] = request.POST["percent_level_3"]
+        
+        details = models.ReferralDetails.objects.filter(id=1)
+        details.update(**content)
+        
+        messages.success(request, "updated success")
+        return redirect("/moderator/referral/details")
 
 class Payment_view(View):
     
@@ -978,12 +1020,16 @@ class ModMember_view(View):
         uname = request.POST["uname"]
         user_profit = request.POST["user_profit"]
         user_referral_profit = request.POST["user_referral_profit"]
+        days = request.POST["days"]
+        invested_amount = request.POST["invested_amount"]
 
         user = models.User.objects.get(username=uname)
         user_plan = models.User_plan.objects.get(user=user)
         user_plan.user_profit = user_profit
         user_plan.user_referral_profit = user_referral_profit
         user_plan.total_profit = str(float(user_profit) + float(user_referral_profit))
+        user_plan.days = days
+        user_plan.invested_amount = invested_amount
         user_plan.save()
 
         messages.info(request, "changes applied")
